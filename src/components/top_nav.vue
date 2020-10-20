@@ -1,10 +1,11 @@
 <template>
     <div class="top_nav_box">
-        <div class="container">
-            <img class="logo_img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+        <div class="container h-60 header_box">
+            <img class="logo_img" src="../assets/baidu.png" alt="">
         <div class="right-item">
             <div class="item" v-for="(item) in top_arr" :key="item.path"
-            @click="$route.path==item.path?$router.go(item.path):none()" 
+            @click="$route.path==item.path?none():$router.push(item.path)" 
+            :class="{'choise_class':$route.path==item.path}"
             >
                 {{item.name}}
             </div>
@@ -53,14 +54,24 @@ export default {
 
 
 <style scoped lang="scss">
+.header_box{
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+.h-60{
+    height: 60px;
+}
+.choise_class{
+    border-bottom: 1px solid rgb(174,0,10) !important;
+}
     .top_nav_box{
         
         background: white;
 
        
         .logo_img{
-            width: 70px;
-            height: 40px;
+            // width: 100px;
+            // height: 40px;
             border-radius: 5px;
         }
         .right-item{
@@ -69,11 +80,15 @@ export default {
             display: flex;
             width: 700px;
             justify-content: space-between;
+            height: 100%;
+            .item{
+                line-height: 58px;
+                cursor: pointer;
+            }
         }
     }
     .container{
         box-sizing: border-box;
-        padding:  5px 10px 5px 25px;
         display: flex;
          align-items: center;
         justify-content: space-between;

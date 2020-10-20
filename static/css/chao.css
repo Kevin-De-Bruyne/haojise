@@ -1,0 +1,130 @@
+.banner-5 {
+    padding: 120px 0 90px;
+    /* margin: 120px 0 0 0; */
+}
+
+.ygl-section-items {
+    width: 100%;
+    min-width: 960px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: auto 100%;
+    position: relative;
+    overflow: hidden;
+}
+@media only screen and(max-width: 768px){
+    .hide_768{
+        display: none;
+    }
+}
+
+
+.banner-5 .main-content-center {
+    position: relative;
+}
+
+@media only screen and (max-width: 1280px){
+    .main-content-center {
+        width: 90%;
+        max-width: 1200px;
+        height: 100%;
+        padding-bottom: 1px;
+        margin: auto;
+    }
+}
+
+
+@media only screen and (max-width: 1200px){
+    .banner-5 .news-list-wrapper {
+        width: calc(100% - 230px);
+        padding: 15px 0;
+        margin: -240px 0 0 230px;
+    }
+}
+@media only screen and (max-width: 1440px){
+    .banner-5 .news-list-wrapper {
+         width: calc(100% - 230px); 
+         padding: 15px 0; 
+         margin: -260px 0 0 230px; 
+    }
+}
+.banner-5 .news-list-wrapper {
+    width: calc(100% - 280px);
+    padding: 15px 0;
+    margin: -260px 0 0 280px;
+    position: relative;
+}
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+
+.banner-5 .news-desc-wrapper .ygl-section-title-box {
+    text-align: left;
+    padding: 0;
+}
+.ygl-section-title-box {
+    padding: 70px 0 50px;
+    text-align: center;
+}
+.news-list-wrapper{
+    height: 300px;
+}
+@media only screen and (max-width: 1200px){
+    .banner-5 .news-desc-wrapper .new-lable-img {
+        height: 22px;
+        margin: 10px 0;
+    }
+}
+.banner-5 .news-desc-wrapper .read-news-button {
+    display: inline-block;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 26px;
+    background: transparent;
+    border: 1px solid #fff;
+    padding: 10px 30px;
+    margin-top: 80px;
+}
+
+.ygl-section-title-box .ch-title {
+    font-size: 28px;
+    line-height: 40px;
+}
+.banner-5 .ygl-section-title-box .desc-text {
+    padding-top: 0;
+}
+
+.ygl-section-title-box .desc-text {
+    font-size: 18px;
+    line-height: 30px;
+    padding-top: 20px;
+}
+
+
+
+.banner-5 .news-desc-wrapper {
+    display: inline-block;
+    width: 20%;
+    background: #9f9b93;
+    padding: 40px 240px 58px 40px;
+    text-align: left;
+    color: #fff;
+    position: relative;
+}
+
+
+.main-content-center {
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    padding-bottom: 1px;
+    margin: auto;
+    position: relative;
+}

@@ -4,13 +4,13 @@
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="item in 4" :key="item">
           <img
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
+            src="//gdp.alicdn.com/imgextra/i1/2208346827954/O1CN013AGqR928cyw1ZqB4W_!!2208346827954.jpg"
             alt=""
           />
         </van-swipe-item>
       </van-swipe>
     </div>
-    <div class="container">
+    <div class="container p-t-20">
       <div class="text-box">
         <div class="text1">熬夜加班，就喝好吉色</div>
         <div class="text2">
@@ -24,7 +24,7 @@
            <div class="item" >
           <div class="left">
             <img
-              src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
+              src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png"
               alt=""
             />
           </div>
@@ -49,13 +49,14 @@
           </div>
           <div class="swipter_box" v-else>
             <van-swipe
-              class="vant_swipe2"
+              class="vant_swipe2 img_100"
               :autoplay="3000"
               indicator-color="white"
               :touchable="true"
             >
               <van-swipe-item v-for="item_child in item" :key="item_child">
                 <img
+                class="img_100j"
                   :src="item_child"
                   alt=""
                 />
@@ -81,7 +82,7 @@
                   查看更多
               </div>
           </div>
-          <div class="right">
+          <div class="right img_100">
                <van-swipe
               class="vant_swipe2"
               :autoplay="3000"
@@ -91,6 +92,7 @@
             >
               <van-swipe-item v-for="item in 4 " :key="item">
                 <img
+                class="img_100j"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
                   alt="图片加载失败"
                 />
@@ -117,7 +119,7 @@
         </div>
         </div>
        
-        <div class="hezuo-box">
+        <div class="hezuo-box hide_768">
             <div class="left">
                 <div class="text1">
                     诚邀实力合作伙伴
@@ -133,33 +135,30 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="news-box">
-            <div class="left">
-                <div class="text1">
-                    新闻动态
-                </div>
-                <div class="text2">
-                    CJIFA11231
-                </div>
-                <div class="yellow-box">
-                    fafafa
-                </div>
-                <div class="text3">
-                    新闻动态新闻
-                </div>
-                <div class="butn">
-                    点击阅读
-                </div>
-                <div class="icon-box">
+    
+    <div class="ygl-section-items banner-5">
+      <div class="main-content-center">
+        <div class="news-desc-wrapper">
+          <div class="ygl-section-title-box">
+            <div class="ch-title">新闻动态</div>
+            <div class="desc-text">
+              GOOD NEWS
+            </div>
+          </div>
+          <img src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/financing_lable.png" class="new-lable-img" alt="">
+          <div class="news-desc">驿公里智能获得多家国内外一线投资机构的青睐，累计融资金额达数十亿元</div>
+          <div class="read-news-button">
+            点击阅读
+          </div>
+        </div>
+        <div class="icon-box">
                     <span class="iconfont icon-arrow-left"></span>
                     <span class="m-l-5 m-r-5">1/2</span>
                     
                     <span class="iconfont icon-youjiantou"></span>
-                </div>
-            </div>
-            <div class="news-swipe">
-                     <van-swipe
+        </div>
+        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android">
+            <van-swipe
               class="vant_swipe3"
               indicator-color="white"
               :touchable="true"
@@ -168,19 +167,21 @@
                   <div class="news-img-box">
                       <div class="item" v-for="items in 3" :key="items">
                           <div class="img-box">
-                              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                              <img src="../assets/shihua.jpg" alt="">
                           </div>
                           <div class="text-box">
                               儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
                           </div>
-                          <img class="bottom_img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                          <div class="bottom_img-box">
+                            <img class="bottom_img" src="../assets/baidu.png" alt="">
+                          </div>
+                          
                       </div>
                   </div>
               </van-swipe-item>
             </van-swipe>
-                </div>
-
         </div>
+      </div>
     </div>
 
     <div class="huoban_box">
@@ -236,12 +237,13 @@ export default {
   },
   data(){
     return{
-      scroll:null
+      scroll:null,
+      imgurl:'https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png'
     }
   },
   created() {
     this.$nextTick(() => {
-      this.personScroll(20,150);
+      this.personScroll(20,240);
     });
   },
   methods: {
@@ -287,14 +289,14 @@ export default {
         ],
       banner_img: [
         [
-            require('../assets/img.jpg'),
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
+            '//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg',
+          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
         ],
-        "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
-        "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
+        "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
+        "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
         [
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
+          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
+          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
         ],
       ],
       icon_arr: [
@@ -321,6 +323,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.img_100{
+  .img_100j{
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+  .van-swipe{
+    /deep/img{
+      width: auto !important;
+      height: auto !important;
+    }
+  } 
+  .icon-box{
+            text-align: right;
+            color: #999;
+            display: flex;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            .iconfont{
+                cursor: pointer;
+            }
+        }
+  
+@import url('../../static/css/chao.css');
 .w-90{
   width: 90%;
 }
@@ -367,10 +394,13 @@ export default {
       display: flex;
       .item{
         height: 100%;
-        width: 170px;
+        width: 240px;
         margin: 0 10px;
+        display: flex;
         img{
-          height: 100%;
+          margin: auto;
+          // width: 100%;
+          // height: 100%;
         }
       }
     }
@@ -390,8 +420,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     div{
-      margin: 10px 3%;
-      width: 14%;
+      margin: 10px 1%;
+      width: 18%;
       display: flex;
     }
      img{
@@ -401,6 +431,47 @@ export default {
      }
   }
 }
+.news-img-box{
+            width: 100%;
+            display: flex;
+            height: 100%;
+            .bottom_img-box{
+              width: 100%;
+              height: 70px;
+              display: flex;
+            }
+            .item{
+              flex: 1 0 auto;
+                background: white;
+                width: 240px;
+                margin: 0 10px;
+                height: 100%;
+                box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4);
+            }
+            .img-box{
+                height: 180px;
+                width: 100%;
+                display: flex;
+                img{
+                   margin: auto;
+                }
+            }
+            .text-box{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 5px;
+                margin: 5px 0 5px 5px;
+                letter-spacing: 0;
+                overflow: hidden;
+                display: -webkit-box;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;  /*要显示的行数*/
+                -webkit-box-orient: vertical;
+            }
+            .bottom_img{
+              margin: auto;
+            }
+        }
 .news-box{
     background: white;
     box-sizing: border-box;
@@ -443,67 +514,24 @@ export default {
             font-size: 14px;
         }
     }
-        .icon-box{
-            text-align: right;
-            color: #999;
-            display: flex;
-            position: absolute;
-            right: 20px;
-            top: 40px;
-            .iconfont{
-                cursor: pointer;
-            }
-        }
+        
         .news-swipe{
             height: 200px;
             z-index: 99;
             width: 800px;
         }
-        .news-img-box{
-            width: 100%;
-            display: flex;
-            height: 100%;
-            .item{
-                background: white;
-                width: 240px;
-                margin: 0 10px;
-                height: 100%;
-                box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4);
-            }
-            .img-box{
-                height: 140px;
-                width: 100%;
-                img{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            .text-box{
-                width: 100%;
-                box-sizing: border-box;
-                padding: 0 5px;
-                margin: 5px 0 5px 5px;
-                letter-spacing: 0;
-                overflow: hidden;
-                display: -webkit-box;
-                text-overflow: ellipsis;
-                -webkit-line-clamp: 2;  /*要显示的行数*/
-                -webkit-box-orient: vertical;
-            }
-            .bottom_img{
-                width: 100%;
-                height: 30px;
-            }
-        }
+        
     
 }
 .hezuo-box{
     width: 70%;
     height: 100px;
-    background: white;
+    background: #e8ebe4;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+    z-index: 99;
+    position: relative;
     padding: 15px 30px 15px 40px;
     color: #000;
     margin: -50px auto 20px auto;
@@ -574,7 +602,7 @@ export default {
     box-sizing: border-box;
     padding: 0 15px 0 40px;
     justify-content: space-between;
-    margin: 100px 0 70px 0;
+    margin: 10% 0 70px 0;
     .left{
         flex: 1;
         .title{
@@ -603,15 +631,20 @@ export default {
 }
 .banner_list{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    // flex-wrap: wrap;
+    .pd-box-10{
+      // min-width: 150px;
+      width: 25%;
+    }
     .item-box{
-        margin: 0 20px;
-        height: 300px;
-        width: 300px;
+        margin: 0 5%;
+        // height: 300px;
+        // width: 20%;
         img{
-            width: 100%;
-            height: 100%;
+          
+            // width: 20vw;
+            // height: 100%;
         }
     }
 }
@@ -621,13 +654,15 @@ export default {
   margin: 20px 0;
   font-size: 12px;
   flex-wrap: wrap;
+  .pd-box-10{
+    width: 25%;
+    min-width: 150px;
+  }
   .item {
-    background: red;
-    width: 220px;
+    width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
-    padding: 20px;
     .left {
       margin: 0 10px 0 0;
       width: 50px;
@@ -648,10 +683,10 @@ export default {
 }
 .container {
   box-sizing: border-box;
-  padding: 0 30px;
+  padding: 0 3%;
 }
 .text-box {
-  margin: 20px auto;
+  margin: 0 auto;
   color: #000;
   text-align: center;
   width: 300px;
@@ -664,10 +699,10 @@ export default {
   }
 }
 .banner_box {
-  height: 500px;
+  // height: 500px;
   img {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: auto !important;
   }
 }
 .my-swipe {

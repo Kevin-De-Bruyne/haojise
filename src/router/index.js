@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import home from '../pages/home'
+import haojise from '../pages/haojise'
 
 
 export default new Router({
@@ -11,7 +12,11 @@ export default new Router({
      {
         path:'/',
         component:home
-     }
+     },
+     {
+      path:'/haojise',
+      component:haojise
+   }
    ]
 })
 

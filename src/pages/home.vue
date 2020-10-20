@@ -20,7 +20,8 @@
       </div>
 
       <div class="icon_list">
-        <div class="item" v-for="item in bg_arr" :key="item.name">
+        <div class="pd-box-10" v-for="item in bg_arr" :key="item.name">
+           <div class="item" >
           <div class="left">
             <img
               src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
@@ -36,10 +37,13 @@
             </div>
           </div>
         </div>
+        </div>
+       
       </div>
 
       <div class="banner_list">
-        <div class="item-box" v-for="(item, index) in banner_img" :key="index">
+        <div class="pd-box-10 " v-for="(item, index) in banner_img" :key="index">
+           <div class="item-box" >
           <div class="img_box" v-if="!Array.isArray(item)">
             <img :src="item" alt="" />
           </div>
@@ -59,6 +63,8 @@
             </van-swipe>
           </div>
         </div>
+        </div>
+       
       </div>
 
         <!-- 为什么选择好吉色 -->
@@ -160,7 +166,7 @@
             >
               <van-swipe-item v-for="item in 2 " :key="item">
                   <div class="news-img-box">
-                      <div class="item" v-for="item in 3" :key="item">
+                      <div class="item" v-for="items in 3" :key="items">
                           <div class="img-box">
                               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
                           </div>
@@ -177,14 +183,88 @@
         </div>
     </div>
 
+    <div class="huoban_box">
+       <div class="title">
+         我们的合作伙伴
+       </div>
+
+       <div class="huoban_img">
+         <div v-for="(item,index) in 15" :key="item">
+            <img  v-if="index%2==0"  src="../assets/ali.jpg" alt="">
+            <img v-else  src="../assets/shihua.jpg" alt="">
+         </div>
+         
+       </div>
+    </div>
+
+    
+
+    <div class="zhichi_box">
+      <div class="title">
+        合作伙伴支持
+      </div>
+      <div class="scroll_box" ref="personWrap">
+        <div class="item-box" ref="personTab">
+          <div class="item" v-for="item in 20" :key="item">
+              <img src="../assets/img.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blue-bg">
+      <div class="left">
+        fafafafafafafa
+      </div>
+      <div class="right">
+        <div class="butn">
+          join us now
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import topNav from "@/components/top_nav";
+import Bscroll from 'better-scroll'
+
 export default {
   components: {
     topNav,
+  },
+  data(){
+    return{
+      scroll:null
+    }
+  },
+  created() {
+    this.$nextTick(() => {
+      this.personScroll(20,150);
+    });
+  },
+  methods: {
+    personScroll(num,widths) {
+      // 默认有六个li子元素，每个子元素的宽度为120px
+      let width = num * widths;
+      this.$refs.personTab.style.width = width + "px";
+      // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new Bscroll(this.$refs.personWrap, {
+            startX: 0,
+            click: true,
+            scrollX: true,
+            // 忽略竖直方向的滚动
+            scrollY: false,
+            eventPassthrough: "vertical"
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      });
+    }
   },
   data() {
     return {
@@ -241,6 +321,86 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.w-90{
+  width: 90%;
+}
+.pd-box-10{
+  padding: 10px 0;
+}
+.blue-bg{
+  background: rgb(5,190,254);
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 10%;
+  height: 60px;
+  align-items: center;
+  color: white;
+  margin: 40px 0 0 0;
+  .right{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    .butn{
+       line-height: 30px;
+    padding: 0 30px;
+      height: 30px;
+      border: 1px solid white;
+    }
+  }
+}
+.zhichi_box{
+  background: white;
+  .title{
+    text-align: center;
+    color: #000;
+    line-height: 40px;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+  }
+  .scroll_box{
+    height: 100px;
+    overflow: hidden;
+    .item-box{
+      height: 100%;
+      display: flex;
+      .item{
+        height: 100%;
+        width: 170px;
+        margin: 0 10px;
+        img{
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+.huoban_box{
+  background: white;
+  box-sizing: border-box;
+  .title{
+    text-align: center;
+    color: #000;
+    line-height: 40px;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+  }
+  .huoban_img{
+    display: flex;
+    flex-wrap: wrap;
+    div{
+      margin: 10px 3%;
+      width: 14%;
+      display: flex;
+    }
+     img{
+       margin:auto;
+      max-width: 100%;
+      max-height: 100%;
+     }
+  }
+}
 .news-box{
     background: white;
     box-sizing: border-box;
@@ -250,16 +410,15 @@ export default {
     position: relative;
     .left{
         display: inline-block;
-        height: 350px;
+        height: 400px;
         width: 40%;
-        background: rgb(159,154,148);
+        background: #9f9b93;
+        padding: 30px 180px 40px 30px;
         box-sizing: border-box;
-        padding: 15px 0 15px 10px;
         color: white;
         flex: 0 0 auto;
         .text1{
             font-size:18px;
-
         }
         .text2{
             font-size: 14px;
@@ -299,9 +458,6 @@ export default {
             height: 200px;
             z-index: 99;
             width: 800px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
         }
         .news-img-box{
             width: 100%;
@@ -467,12 +623,11 @@ export default {
   flex-wrap: wrap;
   .item {
     background: red;
-    width: 250px;
+    width: 220px;
     height: 50px;
     display: flex;
     align-items: center;
     padding: 20px;
-
     .left {
       margin: 0 10px 0 0;
       width: 50px;

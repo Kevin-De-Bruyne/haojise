@@ -10,6 +10,8 @@ import 'vant/lib/index.css';
 
 Vue.use(vant)
 
+
+
 new Vue({
   render: h => h(App),
   router

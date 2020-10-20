@@ -2,19 +2,27 @@
     <div>
         <top-nav />
         <router-view />
+        <footers />
     </div>
 </template>
 
 <script>
 import topNav from '@/components/top_nav'
+import footers from '@/components/bottom'
 export default {
     components:{
-        topNav
+        topNav,
+        footers
     }
 }
 </script>
 
 <style  lang="scss">
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+}
 body{
   background: rgb(242,242,242);
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top-nav />
+        
         <router-view />
         <footers />
     </div>

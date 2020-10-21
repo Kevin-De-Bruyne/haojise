@@ -1,10 +1,11 @@
 <template>
     <div class="content">
         <div class="banner_box">
+            <top-nav />
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="item in 4" :key="item">
+        <van-swipe-item v-for="item in swiper_arr" :key="item">
           <img
-            src="//gdp.alicdn.com/imgextra/i1/2208346827954/O1CN013AGqR928cyw1ZqB4W_!!2208346827954.jpg"
+            :src="item"
             alt=""
           />
         </van-swipe-item>
@@ -58,7 +59,7 @@
      <div class="tedian1-bg">
           <div class="text-box">
                  <div class="text1">
-                     智能无人引导系统
+                     特点二
                  </div>
                  <div class="text2">
                      多项独具创新的设计，激光雷达、超声波检测、光电定位，为用户提供更好的引导和洗车体验
@@ -82,13 +83,64 @@
             </div>
          </div>
      </div>
+
+     <div class="xikong_box">
+         <div class="text-box">
+             <div class="text1">
+                 特点三
+             </div>
+             <div class="text2">
+                 洗控系统专利技术，借助大量车型的洗车数据，创建完善清洗模
+                 块，同一车型、同一辆车，洗的次数越多越干净
+             </div>
+         </div>
+     </div>
+
+     <!-- <div class="img_bg">
+         <img src="https://source.1kmxc.com/static-web-new/website/images3.0/carwasher/ygl_eco_system.jpg" alt="">
+     </div> -->
+     <div class="white">
+         <div class="list-box">
+         <div class="item" v-for="item in 4" :key="item">
+             <div class="text-box">
+                 <div class="text1">
+                     车机互联
+                 </div>
+                 <div class="text2">
+                     车辆进入地图范围，智能提醒洗车需求
+                 </div>
+             </div>
+             <div class="img-box">
+                 <img src="https://source.1kmxc.com/static-web-new/website/images3.0/carwasher/ygl_iot_4.jpg" alt="">
+             </div>
+         </div>
+     </div>
+     </div>
+      <div class="tedian1-box">
+         <div class="text-box">
+             <div class="title-text">
+            特点四
+         </div>
+         <div class="title-text2">
+             专门为无人化场景而设计的全新硬件，由麻省理工团队研发，获得多项专利认证
+         </div>
+         </div>
+         
+         <div class="img-box">
+             <img src="https://source.1kmxc.com/static-web-new/website/images3.0/carwasher/ygl_carwasher_drawing_1.jpg" alt="">
+
+         </div>
+         
+     </div>
     </div>
 </template>
 
 <script>
+import topNav from "@/components/top_nav";
 export default {
     data(){
         return{
+             swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
             top_arr:['特点一','特点二','特点三','特点四'],
             top_index:0,
             xiala_arr:[
@@ -124,22 +176,93 @@ export default {
             },
             ]
         }
+    },
+    components:{
+        topNav
     }
 }
 </script>
 
 <style scoped lang="scss">
+.white{
+    background: white;
+}
+.list-box{
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    top: -50px;
+    background: #f1f4f6;
+    display: flex;
+    text-align: center;
+    min-width: 965px;
+    .item{
+        box-sizing: border-box;
+        margin: 0 5px;
+        width: 25%;
+    }
+    .text-box{
+        // box-sizing: border-box;
+        padding: 14% 7% 12% 7%;
+        .text1{
+            font-size: 20px;
+            margin: 0 0 10px 0;
+        }
+        .text2{
+            font-size: 16px;
+        }
+    }
+    .img-box{
+        display: flex;
+        
+        // height: 200px;
+        img{
+            margin: auto;
+        }
+    }
+}
+.img_bg{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    img{
+        margin: auto;
+        position: relative;
+        top: -50px;
+    }
+}
+.xikong_box{
+    background: url('https://source.1kmxc.com/static-web-new/website/images3.0/carwasher/ygl_carwasher_bg_004_1.jpg');
+    background-position: 100% 0;
+    background-size: auto 100%;
+    height: 680px;
+    box-sizing: border-box;
+    padding: 6% 4% 0 4%;
+    text-align: center;
+    .text-box{
+        color: white;
+        .text1{
+            font-size: 28px;
+            margin: 0 0 10px 0;
+        }
+        .text2{
+            font-size: 14px;
+
+        }
+    }
+}
 .white-box{
     background: white;
     .white-container{
         width: 90%;
-        margin: 0 auto;
+        margin: 0 auto 0 auto ;
         color: #000;
         .gray-box{
             background: rgb(240,244,247);
-            margin: -50% 0 0 0;
             display: flex;
             height: 350px;
+            position: relative;
+            top: -50px;
             // flex-wrap: wrap;
             .left{
                 height: 100%;

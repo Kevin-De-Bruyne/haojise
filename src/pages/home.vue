@@ -1,16 +1,18 @@
 <template>
   <div>
     <div class="banner_box">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="item in 4" :key="item">
+      <top-nav />
+      <van-swipe class="my-swipe" :autoplay="false" indicator-color="white">
+        <van-swipe-item v-for="item in swiper_arr" :key="item">
           <img
-            src="//gdp.alicdn.com/imgextra/i1/2208346827954/O1CN013AGqR928cyw1ZqB4W_!!2208346827954.jpg"
+            :src="item"
             alt=""
           />
         </van-swipe-item>
       </van-swipe>
     </div>
-    <div class="container p-t-20">
+    <div class="bg_white p-b-20">
+      <div class="container p-t-20">
       <div class="text-box">
         <div class="text1">熬夜加班，就喝好吉色</div>
         <div class="text2">
@@ -24,7 +26,7 @@
            <div class="item" >
           <div class="left">
             <img
-              src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png"
+              src="../assets/mangguo.jpg"
               alt=""
             />
           </div>
@@ -93,7 +95,7 @@
               <van-swipe-item v-for="item in 4 " :key="item">
                 <img
                 class="img_100j"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
+                  src="https://iph.href.lu/500x230?text=%E5%9B%BE%E7%89%87%E6%AF%94%E4%BE%8B%3D2.1%20%3A%201&fg=666666&bg=cccccc"
                   alt="图片加载失败"
                 />
               </van-swipe-item>
@@ -101,13 +103,15 @@
           </div>
       </div>
     </div>
+    </div>
+    
 
     <div class="bg_box">
         <div class="pd-box">
              <div class="item-box">
             <div class="item" v-for="item in bg_arr" :key="item.title">
                 <div class="top">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                    <img src="https://iph.href.lu/100x100?fg=666666&bg=cccccc" alt="">
                 </div>
                 <div class="text1">
                     {{item.title}}
@@ -119,7 +123,9 @@
         </div>
         </div>
        
-        <div class="hezuo-box hide_768">
+        
+    </div>
+    <div class="hezuo-box hide_768 hide_425">
             <div class="left">
                 <div class="text1">
                     诚邀实力合作伙伴
@@ -134,9 +140,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="ygl-section-items banner-5">
+
+     <!-- <div class="ygl-section-items banner-5 ">
       <div class="main-content-center">
         <div class="news-desc-wrapper">
           <div class="ygl-section-title-box">
@@ -182,9 +187,82 @@
             </van-swipe>
         </div>
       </div>
+    </div> -->
+    
+    <div class="ygl-section-items banner-5">
+      <div class="main-content-center ">
+        <div class="news-desc-wrapper">
+          <div class="ygl-section-title-box">
+            <div class="ch-title">新闻动态</div>
+            <div class="desc-text">
+              GOOD NEWS
+            </div>
+          </div>
+          <img src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/financing_lable.png" class="new-lable-img" alt="">
+          <div class="news-desc">驿公里智能获得多家国内外一线投资机构的青睐，累计融资金额达数十亿元</div>
+          <div class="read-news-button">
+            点击阅读
+          </div>
+        </div>
+        <div class="icon-box">
+                    <span class="iconfont icon-arrow-left"></span>
+                    <span class="m-l-5 m-r-5">1/2</span>
+                    
+                    <span class="iconfont icon-youjiantou"></span>
+        </div>
+        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android hide_425">
+            <van-swipe
+              class="vant_swipe3"
+              indicator-color="white"
+              :touchable="true"
+            >
+              <van-swipe-item v-for="item in 2 " :key="item">
+                  <div class="news-img-box">
+                      <div class="item" v-for="items in 3" :key="items">
+                          <div class="img-box">
+                              <img src="../assets/shihua.jpg" alt="">
+                          </div>
+                          <div class="text-box">
+                              儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
+                          </div>
+                          <div class="bottom_img-box">
+                            <img class="bottom_img" src="../assets/baidu.png" alt="">
+                          </div>
+                          
+                      </div>
+                  </div>
+              </van-swipe-item>
+            </van-swipe>
+        </div>
+          <div class="news-list-wrapper2  swiper-container-horizontal swiper-container-android show_425">
+            <van-swipe
+              class="vant_swipe3 vant_swipe_425"
+              indicator-color="white"
+              :touchable="true"
+            >
+              <van-swipe-item v-for="item in 2 " :key="item">
+                  <div class="news-img-box2">
+                      <div class="item" v-for="items in 3" :key="items">
+                          <div class="img-box">
+                              <img src="../assets/shihua.jpg" alt="">
+                          </div>
+                          <div class="text-box">
+                              儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
+                          </div>
+                          <div class="bottom_img-box">
+                            <img class="bottom_img" src="../assets/baidu.png" alt="">
+                          </div>
+                          
+                      </div>
+                  </div>
+              </van-swipe-item>
+            </van-swipe>
+        </div>
+      </div>
     </div>
-
-    <div class="huoban_box">
+    <div class="green_bg">
+      <div class="container green_bg">
+      <div class="huoban_box green_bg">
        <div class="title">
          我们的合作伙伴
        </div>
@@ -197,21 +275,29 @@
          
        </div>
     </div>
-
+    </div>
+    </div>
+    
     
 
-    <div class="zhichi_box">
+    <div class="bg_white">
+      <div class="container">
+     <div class="zhichi_box">
       <div class="title">
         合作伙伴支持
       </div>
       <div class="scroll_box" ref="personWrap">
         <div class="item-box" ref="personTab">
           <div class="item" v-for="item in 20" :key="item">
-              <img src="../assets/img.jpg" alt="">
+              <img src="../assets/banner.jpg" alt="">
           </div>
         </div>
       </div>
     </div>
+   </div>
+    </div>
+   
+    
 
     <div class="blue-bg">
       <div class="left">
@@ -235,41 +321,11 @@ export default {
   components: {
     topNav,
   },
-  data(){
-    return{
-      scroll:null,
-      imgurl:'https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png'
-    }
-  },
-  created() {
-    this.$nextTick(() => {
-      this.personScroll(20,240);
-    });
-  },
-  methods: {
-    personScroll(num,widths) {
-      // 默认有六个li子元素，每个子元素的宽度为120px
-      let width = num * widths;
-      this.$refs.personTab.style.width = width + "px";
-      // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
-      this.$nextTick(() => {
-        if (!this.scroll) {
-          this.scroll = new Bscroll(this.$refs.personWrap, {
-            startX: 0,
-            click: true,
-            scrollX: true,
-            // 忽略竖直方向的滚动
-            scrollY: false,
-            eventPassthrough: "vertical"
-          });
-        } else {
-          this.scroll.refresh();
-        }
-      });
-    }
-  },
   data() {
     return {
+       swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
+      scroll:null,
+      imgurl:'https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png',
         bg_arr:[{
             title:'好吉色',
             content:'好吉色介绍好啊啊'
@@ -319,10 +375,44 @@ export default {
       ],
     };
   },
+  created() {
+    this.$nextTick(() => {
+      this.personScroll(20,240);
+    });
+  },
+  methods: {
+    personScroll(num,widths) {
+      // 默认有六个li子元素，每个子元素的宽度为120px
+      let width = num * widths;
+      this.$refs.personTab.style.width = width + "px";
+      // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new Bscroll(this.$refs.personWrap, {
+            startX: 0,
+            click: true,
+            scrollX: true,
+            // 忽略竖直方向的滚动
+            scrollY: false,
+            eventPassthrough: "vertical"
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      });
+    }
+  },
+  
 };
 </script>
 
 <style scoped lang="scss">
+.green_bg{
+  background: rgb(50,188,173) !important;
+}
+.bg_white{
+  background: white;
+}
 .img_100{
   .img_100j{
     width: 100% !important;
@@ -411,7 +501,7 @@ export default {
   box-sizing: border-box;
   .title{
     text-align: center;
-    color: #000;
+    color: white;
     line-height: 40px;
     margin: 0 0 10px 0;
     font-size: 20px;
@@ -421,17 +511,63 @@ export default {
     flex-wrap: wrap;
     div{
       margin: 10px 1%;
-      width: 18%;
+      width: 100px;
       display: flex;
+      border-radius: 50%;
+      overflow: hidden;
+      height: 100px;
+      background: white;
     }
      img{
+       
        margin:auto;
       max-width: 100%;
       max-height: 100%;
      }
   }
 }
-.news-img-box{
+.news-img-box2{
+            width: 100%;
+            display: flex;
+            height: 100%;
+            .bottom_img-box{
+              width: 100%;
+              height: 40px;
+              display: flex;
+            }
+            .item{
+              flex: 1 0 auto;
+                background: white;
+                width: 45%;
+                margin: 0 10px;
+                height: 100%;
+                box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4);
+            }
+            .img-box{
+                height: 130px;
+                width: 100%;
+                display: flex;
+                img{
+                   margin: auto;
+                }
+            }
+            .text-box{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 5px;
+                margin: 5px 0 5px 5px;
+                letter-spacing: 0;
+                overflow: hidden;
+                display: -webkit-box;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;  /*要显示的行数*/
+                -webkit-box-orient: vertical;
+            }
+            .bottom_img{
+              margin: auto;
+            }
+        }
+        .news-img-box{
             width: 100%;
             display: flex;
             height: 100%;
@@ -531,10 +667,11 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     z-index: 99;
+    
     position: relative;
     padding: 15px 30px 15px 40px;
     color: #000;
-    margin: -50px auto 20px auto;
+    margin: -50px auto 170px auto;
     .left{
 
         .text1{
@@ -560,7 +697,7 @@ export default {
     }
 }
 .bg_box{
-    background: url('../assets/img.jpg') 0 0 no-repeat;
+    background: url('../assets/banner.jpg') 0 0 no-repeat;
     background-size: cover;
     height: 300px;
     color: white;
@@ -602,7 +739,7 @@ export default {
     box-sizing: border-box;
     padding: 0 15px 0 40px;
     justify-content: space-between;
-    margin: 10% 0 70px 0;
+    margin: 10% 0 0 0;
     .left{
         flex: 1;
         .title{
@@ -684,6 +821,7 @@ export default {
 .container {
   box-sizing: border-box;
   padding: 0 3%;
+  background: white;
 }
 .text-box {
   margin: 0 auto;

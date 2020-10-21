@@ -1,9 +1,9 @@
 <template>
 <div class="bottom_box">
  <div class="container">
-        <div class="left">
+     
             <div class="img-box">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                <img src="https://iph.href.lu/200x290?fg=666666&bg=cccccc" alt="">
             </div>
             <div class="bottom-box1 bottom-box">
                 <div class="title">
@@ -20,8 +20,6 @@
                     <li>fafafafafaf</li>
                 </ul>
             </div>
-        </div>
-        <div class="right">
             <div class="bottom-box2 bottom-box">
                 <div class="title">
                     好吉色好吉色
@@ -29,7 +27,7 @@
                 <div class="item-box">
                     <div class="item" v-for="item in 3" :key="item">
                         <div class="left_img">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                            <img src="https://iph.href.lu/100x70?fg=666666&bg=cccccc" alt="">
                         </div>
                         <div class="right_text">
                             <div class="text1">
@@ -49,7 +47,7 @@
                 <div class="item-box">
                     <div class="item" v-for="item in 2" :key="item">
                         <div class="left_img">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" alt="">
+                            <img src="https://iph.href.lu/110x90?fg=666666&bg=cccccc" alt="">
                         </div>
                         <div class="right_text">
                             <div class="text1">
@@ -59,7 +57,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
+       
     </div>
 </div>
    
@@ -73,7 +72,7 @@ export default {
 
 <style scoped lang="scss">
 .container{
-    background: yellow;
+    background: #000;
     display: flex;
        flex-wrap: wrap;
        box-sizing: border-box;
@@ -85,7 +84,7 @@ img{
     height: 100%;
 }
    .bottom_box{
-       background:yellow;
+       background:#000;
     //    background: rgb(23,23,25);
       
        .left{

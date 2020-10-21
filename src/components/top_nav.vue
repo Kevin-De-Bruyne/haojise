@@ -1,7 +1,7 @@
 <template>
     <div class="top_nav_box">
-        <div class="container h-60 header_box">
-            <img class="logo_img" src="../assets/baidu.png" alt="">
+        <div class="h-60 header_box">
+            <img class="logo_img" src="../assets/logo.png" alt="">
         <div class="right-item">
             <div class="item" v-for="(item) in top_arr" :key="item.path"
             @click="$route.path==item.path?none():$router.push(item.path)" 
@@ -30,7 +30,7 @@ export default {
                },
                {
                 name:'走进好吉色',
-                path:'/goin_haojise'
+                path:'/gongsi'
                },
                {
                 name:'新闻报道',
@@ -54,10 +54,6 @@ export default {
 
 
 <style scoped lang="scss">
-.header_box{
-    box-sizing: border-box;
-    padding: 0 10px;
-}
 .h-60{
     height: 60px;
 }
@@ -65,17 +61,29 @@ export default {
     border-bottom: 1px solid rgb(174,0,10) !important;
 }
     .top_nav_box{
-        
-        background: white;
+        position: absolute;
+        top: 4%;
+        left: 0;
+        box-sizing: border-box;
+        padding: 0 4%;
+        z-index: 999;
+        width: 100%;
 
-       
+       .header_box{
+             box-sizing: border-box;
+        display: flex;
+         align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        color: white;
+        margin: auto;
+       }
         .logo_img{
             // width: 100px;
             // height: 40px;
             border-radius: 5px;
         }
         .right-item{
-            color: #000;
             font-size: 16px;
             display: flex;
             width: 700px;
@@ -88,9 +96,7 @@ export default {
         }
     }
     .container{
-        box-sizing: border-box;
-        display: flex;
-         align-items: center;
-        justify-content: space-between;
+      
     }
+   
 </style>

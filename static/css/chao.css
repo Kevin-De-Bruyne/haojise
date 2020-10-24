@@ -17,6 +17,18 @@
     }
 }
 
+@media only screen and (max-width:850px){
+    .hide_850{
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width:851px){
+    .show_850{
+        display: none;
+    }
+}
+
 
 .banner-5 .main-content-center {
     position: relative;
@@ -113,8 +125,21 @@
     padding-bottom: 1px;
     margin: auto;
     position: relative;
+    background: white;
 }
 
+@media screen and (max-width:725px){
+    .hide_725{
+        display: none !important;
+    }
+    
+}
+
+@media screen and (min-width:726px){
+    .show_725{
+        display: none !important;
+    }
+}
 
 
 @media  screen and (max-width:425px){

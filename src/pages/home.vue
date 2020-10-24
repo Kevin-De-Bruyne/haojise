@@ -2,7 +2,7 @@
   <div>
     <div class="banner_box">
       <top-nav />
-      <van-swipe class="my-swipe" :autoplay="false" indicator-color="white">
+      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="item in swiper_arr" :key="item">
           <img
             :src="item"
@@ -21,12 +21,15 @@
         </div>
       </div>
 
-      <div class="icon_list">
-        <div class="pd-box-10" v-for="item in bg_arr" :key="item.name">
-           <div class="item" >
-          <div class="left">
+      <el-row class="icon_list" :gutter="20">
+        <el-col class="pd-box-10" v-for="item in bg_arr" :key="item.name"
+        :sm="6" :xs="12" 
+        >
+           <div class="item">
+             <div class="top_item">
+               <div class="left">
             <img
-              src="../assets/mangguo.jpg"
+              src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc"
               alt=""
             />
           </div>
@@ -38,16 +41,11 @@
               {{ item.content }}
             </div>
           </div>
-        </div>
-        </div>
-       
-      </div>
-
-      <div class="banner_list">
-        <div class="pd-box-10 " v-for="(item, index) in banner_img" :key="index">
-           <div class="item-box" >
-          <div class="img_box" v-if="!Array.isArray(item)">
-            <img :src="item" alt="" />
+             </div>
+          <div class="bottom_item">
+            <div class="item-box" >
+          <div class="img_box" v-if="index%2==0">
+            <img src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc" alt="" />
           </div>
           <div class="swipter_box" v-else>
             <van-swipe
@@ -56,19 +54,21 @@
               indicator-color="white"
               :touchable="true"
             >
-              <van-swipe-item v-for="item_child in item" :key="item_child">
+              <van-swipe-item v-for="(item_child,i) in 2" :key="i">
                 <img
                 class="img_100j"
-                  :src="item_child"
+                  src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc"
                   alt=""
                 />
               </van-swipe-item>
             </van-swipe>
           </div>
         </div>
+          </div>
         </div>
+        </el-col>
        
-      </div>
+      </el-row>
 
         <!-- 为什么选择好吉色 -->
       <div class="choise_box">
@@ -109,7 +109,7 @@
     <div class="bg_box">
         <div class="pd-box">
              <div class="item-box">
-            <div class="item" v-for="item in bg_arr" :key="item.title">
+            <div class="item" v-for="(item,index) in bg_arr" :key="index">
                 <div class="top">
                     <img src="https://iph.href.lu/100x100?fg=666666&bg=cccccc" alt="">
                 </div>
@@ -141,53 +141,7 @@
             </div>
         </div>
 
-     <!-- <div class="ygl-section-items banner-5 ">
-      <div class="main-content-center">
-        <div class="news-desc-wrapper">
-          <div class="ygl-section-title-box">
-            <div class="ch-title">新闻动态</div>
-            <div class="desc-text">
-              GOOD NEWS
-            </div>
-          </div>
-          <img src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/financing_lable.png" class="new-lable-img" alt="">
-          <div class="news-desc">驿公里智能获得多家国内外一线投资机构的青睐，累计融资金额达数十亿元</div>
-          <div class="read-news-button">
-            点击阅读
-          </div>
-        </div>
-        <div class="icon-box">
-                    <span class="iconfont icon-arrow-left"></span>
-                    <span class="m-l-5 m-r-5">1/2</span>
-                    
-                    <span class="iconfont icon-youjiantou"></span>
-        </div>
-        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android">
-            <van-swipe
-              class="vant_swipe3"
-              indicator-color="white"
-              :touchable="true"
-            >
-              <van-swipe-item v-for="item in 2 " :key="item">
-                  <div class="news-img-box">
-                      <div class="item" v-for="items in 3" :key="items">
-                          <div class="img-box">
-                              <img src="../assets/shihua.jpg" alt="">
-                          </div>
-                          <div class="text-box">
-                              儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
-                          </div>
-                          <div class="bottom_img-box">
-                            <img class="bottom_img" src="../assets/baidu.png" alt="">
-                          </div>
-                          
-                      </div>
-                  </div>
-              </van-swipe-item>
-            </van-swipe>
-        </div>
-      </div>
-    </div> -->
+
     
     <div class="ygl-section-items banner-5">
       <div class="main-content-center ">
@@ -215,7 +169,7 @@
               class="vant_swipe3"
               indicator-color="white"
               :touchable="true"
-            >
+            > 
               <van-swipe-item v-for="item in 2 " :key="item">
                   <div class="news-img-box">
                       <div class="item" v-for="items in 3" :key="items">
@@ -345,14 +299,14 @@ export default {
         ],
       banner_img: [
         [
-            '//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg',
-          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
+            'https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc',
+          "https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc",
         ],
-        "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
-        "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
+        "https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc",
+        "https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc",
         [
-          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
-          "//img.alicdn.com/bao/uploaded/i3/2208346827954/O1CN01GOgsaS28cyvbQD9N2_!!2208346827954.jpg_240x240.jpg",
+          "https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc",
+          "https://iph.href.lu/500x500?text=1%3A1&fg=666666&bg=cccccc",
         ],
       ],
       icon_arr: [
@@ -660,9 +614,10 @@ export default {
     
 }
 .hezuo-box{
+  max-width: 1200px;
+  background: white;
     width: 70%;
     height: 100px;
-    background: #e8ebe4;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -671,7 +626,7 @@ export default {
     position: relative;
     padding: 15px 30px 15px 40px;
     color: #000;
-    margin: -50px auto 170px auto;
+    margin: -50px auto 60px auto;
     .left{
 
         .text1{
@@ -697,10 +652,12 @@ export default {
     }
 }
 .bg_box{
-    background: url('../assets/banner.jpg') 0 0 no-repeat;
+    background: url('https://iph.href.lu/1920x275?text=2.8%3A1&fg=666666&bg=cccccc') 0 0 no-repeat;
     background-size: cover;
     height: 300px;
     color: white;
+    background-size: auto 100%;
+    background-position: 50%;
     .pd-box{
         display: flex;
         height: 100%;
@@ -791,15 +748,15 @@ export default {
   margin: 20px 0;
   font-size: 12px;
   flex-wrap: wrap;
+  .top_item{
+    display: flex;
+    margin: 0 0 6% 0;
+  }
   .pd-box-10{
-    width: 25%;
     min-width: 150px;
   }
   .item {
     width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
     .left {
       margin: 0 10px 0 0;
       width: 50px;

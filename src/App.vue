@@ -1,23 +1,26 @@
 <template>
     <div>
-        
         <router-view />
         <footers />
+        <right />
     </div>
 </template>
 
 <script>
 import topNav from '@/components/top_nav'
 import footers from '@/components/bottom'
+import right_nav from '@/components/right_nav'
 export default {
     components:{
         topNav,
-        footers
+        footers,
+        right:right_nav
     }
 }
 </script>
 
 <style  lang="scss">
+
 .container{
   max-width: 1200px;
   margin: 0 auto;

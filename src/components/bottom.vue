@@ -1,11 +1,15 @@
 <template>
 <div class="bottom_box">
  <div class="container">
-     
-            <div class="img-box">
-                <img src="https://iph.href.lu/200x290?fg=666666&bg=cccccc" alt="">
-            </div>
-            <div class="bottom-box1 bottom-box">
+        <el-row>
+
+        
+            <el-col :sm="8" class="hidden-sm-and-down" :xs="12">
+                <div class="img-box">
+                    <img src="https://iph.href.lu/200x290?fg=666666&bg=cccccc" alt="">
+                </div>
+            </el-col>
+            <el-col :sm="6" :xs="12" class="bottom-box1 bottom-box">
                 <div class="title">
                     好吉色 好吉色
                 </div>
@@ -19,8 +23,8 @@
                     <li>fafafafafaf</li>
                     <li>fafafafafaf</li>
                 </ul>
-            </div>
-            <div class="bottom-box2 bottom-box">
+            </el-col>
+            <el-col :sm="6" :xs="12" class="bottom-box2 bottom-box">
                 <div class="title">
                     好吉色好吉色
                 </div>
@@ -39,8 +43,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="bottom-box3 bottom-box">
+            </el-col>
+            <el-col :sm="6" :xs="12" class="bottom-box3 bottom-box">
                 <div class="title">
                     好吉色好吉色
                 </div>
@@ -56,9 +60,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </el-col>
         
-       
+       </el-row>
     </div>
 </div>
    
@@ -73,11 +77,8 @@ export default {
 <style scoped lang="scss">
 .container{
     background: #000;
-    display: flex;
-       flex-wrap: wrap;
        box-sizing: border-box;
        padding: 60px 40px 20px 40px;
-       justify-content: space-between;
 }
 img{
     width: 100%;

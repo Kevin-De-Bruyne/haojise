@@ -3,7 +3,7 @@
     <div class="banner_box">
       <top-nav />
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="item in swiper_arr" :key="item">
+        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
           <img
             :src="item"
             alt=""
@@ -22,14 +22,14 @@
       </div>
 
       <el-row class="icon_list" :gutter="20">
-        <el-col class="pd-box-10" v-for="item in bg_arr" :key="item.name"
+        <el-col class="pd-box-10" v-for="(item,index) in bg_arr" :key="index"
         :sm="6" :xs="12" 
         >
            <div class="item">
              <div class="top_item">
                <div class="left">
             <img
-              src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc"
+              src="https://iph.href.lu/264x264?text=1%3A1&fg=666666&bg=cccccc"
               alt=""
             />
           </div>
@@ -44,10 +44,10 @@
              </div>
           <div class="bottom_item">
             <div class="item-box" >
-          <div class="img_box" v-if="index%2==0">
-            <img src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc" alt="" />
-          </div>
-          <div class="swipter_box" v-else>
+          <!-- <div class="img_box" v-if="index%2==0">
+            <img src="https://iph.href.lu/264x264?text=1%3A1&fg=666666&bg=cccccc" alt="" />
+          </div> -->
+          <div class="swipter_box">
             <van-swipe
               class="vant_swipe2 img_100"
               :autoplay="3000"
@@ -92,7 +92,7 @@
               :touchable="true"
               :vertical="true"
             >
-              <van-swipe-item v-for="item in 4 " :key="item">
+              <van-swipe-item v-for="(item,index) in 4 " :key="index">
                 <img
                 class="img_100j"
                   src="https://iph.href.lu/500x230?text=%E5%9B%BE%E7%89%87%E6%AF%94%E4%BE%8B%3D2.1%20%3A%201&fg=666666&bg=cccccc"
@@ -108,8 +108,8 @@
 
     <div class="bg_box">
         <div class="pd-box">
-             <div class="item-box">
-            <div class="item" v-for="(item,index) in bg_arr" :key="index">
+             <el-row :gutter="20" class="item-box">
+            <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in bg_arr" :key="index">
                 <div class="top">
                     <img src="https://iph.href.lu/100x100?fg=666666&bg=cccccc" alt="">
                 </div>
@@ -119,8 +119,8 @@
                 <div class="text2">
                     {{item.content}}
                 </div>
-            </div>
-        </div>
+            </el-col>
+        </el-row>
         </div>
        
         
@@ -170,9 +170,9 @@
               indicator-color="white"
               :touchable="true"
             > 
-              <van-swipe-item v-for="item in 2 " :key="item">
+              <van-swipe-item v-for="(item,index) in 2 " :key="index">
                   <div class="news-img-box">
-                      <div class="item" v-for="items in 3" :key="items">
+                      <div class="item" v-for="(items,i) in 3" :key="i">
                           <div class="img-box">
                               <img src="../assets/shihua.jpg" alt="">
                           </div>
@@ -194,9 +194,9 @@
               indicator-color="white"
               :touchable="true"
             >
-              <van-swipe-item v-for="item in 2 " :key="item">
+              <van-swipe-item v-for="(item,index) in 2 " :key="index">
                   <div class="news-img-box2">
-                      <div class="item" v-for="items in 3" :key="items">
+                      <div class="item" v-for="(items,i) in 3" :key="i">
                           <div class="img-box">
                               <img src="../assets/shihua.jpg" alt="">
                           </div>
@@ -222,9 +222,8 @@
        </div>
 
        <div class="huoban_img">
-         <div v-for="(item,index) in 15" :key="item">
-            <img  v-if="index%2==0"  src="../assets/ali.jpg" alt="">
-            <img v-else  src="../assets/shihua.jpg" alt="">
+         <div v-for="(item,index) in 15" :key="index">
+            <img    src="https://iph.href.lu/100x100?text=1%3A1&fg=666666&bg=cccccc" alt="">
          </div>
          
        </div>
@@ -240,9 +239,9 @@
       <div class="title">
         合作伙伴支持
       </div>
-      <div class="scroll_box" ref="personWrap">
+      <div class="scroll_box" ref="personWrap" @touchstart="clearTime()" @touchend="startTime()">
         <div class="item-box" ref="personTab">
-          <div class="item" v-for="item in 20" :key="item">
+          <div class="item" v-for="(item,index) in 20" :key="index">
               <img src="../assets/banner.jpg" alt="">
           </div>
         </div>
@@ -277,24 +276,26 @@ export default {
   },
   data() {
     return {
+      times:null,
+      times2:null,
        swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
       scroll:null,
       imgurl:'https://source.1kmxc.com/static-web-new/website/images3.0/X-home/alpha_home_bg_001.png',
         bg_arr:[{
             title:'好吉色',
-            content:'好吉色介绍好啊啊'
+            content:'好吉色介绍好啊啊1'
         },
         {
             title:'好吉色',
-            content:'好吉色介绍好啊啊'
+            content:'好吉色介绍好啊啊2'
         },
         {
             title:'好吉色',
-            content:'好吉色介绍好啊啊'
+            content:'好吉色介绍好啊啊3'
         },
         {
             title:'好吉色',
-            content:'好吉色介绍好啊啊'
+            content:'好吉色介绍好啊啊4'
         },
         ],
       banner_img: [
@@ -335,6 +336,15 @@ export default {
     });
   },
   methods: {
+    clearTime(){
+      clearInterval(this.times)
+      clearTimeout(this.times2)
+    },
+    startTime(){
+      this.times2=setTimeout(() => {
+          this.scrollmove()
+      }, 2000);
+    },
     personScroll(num,widths) {
       // 默认有六个li子元素，每个子元素的宽度为120px
       let width = num * widths;
@@ -348,12 +358,22 @@ export default {
             scrollX: true,
             // 忽略竖直方向的滚动
             scrollY: false,
+            freeScroll:true,
             eventPassthrough: "vertical"
           });
         } else {
           this.scroll.refresh();
         }
       });
+      this.scrollmove()
+      
+    },
+    scrollmove(){
+      let s=0
+       this.times=setInterval(() => {
+        s-=1
+          this.scroll.scrollTo(s,0)
+      }, 10);
     }
   },
   
@@ -464,16 +484,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     div{
-      margin: 10px 1%;
-      width: 100px;
+      margin: 10px 2%;
+      width: 16%;
       display: flex;
-      border-radius: 50%;
-      overflow: hidden;
-      height: 100px;
-      background: white;
+      // height: 100px;
     }
      img{
-       
+      border-radius: 50%;
        margin:auto;
       max-width: 100%;
       max-height: 100%;
@@ -663,9 +680,7 @@ export default {
         height: 100%;
     }
     .item-box{
-        margin: auto;
-        display: flex;
-        justify-content: space-between;
+        margin: auto !important;
         width: 800px;
         text-align: center;
         .item{
@@ -743,11 +758,8 @@ export default {
     }
 }
 .icon_list {
-  display: flex;
-  justify-content: space-between;
   margin: 20px 0;
   font-size: 12px;
-  flex-wrap: wrap;
   .top_item{
     display: flex;
     margin: 0 0 6% 0;

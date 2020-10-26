@@ -1,5 +1,5 @@
 <template>
-    <div class="right_nav_box">
+    <div class="right_nav_box hidden-sm-and-down">
 
         <div class="item-box" v-if="shows">
             <div class="item" v-for="item in nav_arr" :key="item.name">
@@ -46,7 +46,7 @@ export default {
     },
     created(){
         window.addEventListener('scroll',(e)=>{
-                let scrollTop = document.documentElement.scrollTop;
+                let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
                 if(scrollTop>200){
                     this.shows=true
                 }else{

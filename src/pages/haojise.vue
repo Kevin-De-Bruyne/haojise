@@ -7,6 +7,7 @@
           <img
             :src="item"
             alt=""
+            @load="img_load"
           />
         </van-swipe-item>
       </van-swipe>
@@ -124,7 +125,7 @@
      </div> -->
      <div class="white">
          <el-row class="list-box" :gutter="20">
-         <el-col  v-for="(item,index) in 4" :key="index" :sm="6" :xs="12">
+         <el-col  v-for="(item,index) in 4" :key="index" :sm="6" :xs="24">
              <div class="item">
                  <div class="text-box">
                  <div class="text1">
@@ -166,6 +167,7 @@ import topNav from "@/components/top_nav";
 export default {
     data(){
         return{
+            add:false,
              swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
             top_arr:['特点一','特点二','特点三','特点四'],
             top_index:0,
@@ -208,32 +210,35 @@ export default {
         topNav
     },
     created() {
-        this.scroll()
+
     },
     mounted() {
          let height=this.$refs.top_fiex.offsetTop
          console.log(height)
-        let scrollTop = document.documentElement.scrollTop;
+        let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
         if(scrollTop>=height-60){
                     //    this.top_flex=true
         }
     },
     methods: {
-        scroll(){
-            
-             this.$nextTick(()=>{
-                 let height=this.$refs.top_height.offsetTop
+         img_load(){
+        if(this.add){
+          return
+        }
+        this.add=true
+           let timel=null
+         let height=this.$refs.top_height.offsetTop
+                 console.log(height)
            window.addEventListener('scroll',(e)=>{
                    
-                    let scrollTop = document.documentElement.scrollTop;
+                    let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
                      if(scrollTop>=height-60){
                        this.top_flex=true
                    }else{
                        this.top_flex=false
                    }
 				},true)
-        })
-        }  
+      }
     },
     watch: {
         top_index(news,old){
@@ -279,11 +284,12 @@ export default {
         }
     }
     .img-box{
-        display: flex;
-        
+display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */  
         // height: 200px;
+        align-items: center;
+        justify-content: center;
         img{
-            margin: auto;
+            // margin: auto;
         }
     }
 }

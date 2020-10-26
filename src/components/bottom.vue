@@ -4,7 +4,7 @@
         <el-row>
 
         
-            <el-col :sm="8" class="hidden-sm-and-down" :xs="12">
+            <el-col :sm="6" class="hidden-sm-and-down" :xs="12">
                 <div class="img-box">
                     <img src="https://iph.href.lu/200x290?fg=666666&bg=cccccc" alt="">
                 </div>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-col :sm="6" :xs="12" class="bottom-box3 bottom-box">
+            <el-col :sm="6" :xs="24" class="bottom-box3 bottom-box">
                 <div class="title">
                     好吉色好吉色
                 </div>
@@ -75,6 +75,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width:426px) {
+    .bottom_box{
+        text-align: center !important;
+        img{
+            display: block;
+        }
+    }
+}
 .container{
     background: #000;
        box-sizing: border-box;
@@ -113,7 +121,6 @@ img{
 
        }
        .bottom-box1{
-           max-width: 150px;
            
            ul{
                li{
@@ -128,7 +135,8 @@ img{
            .item-box{
                .item{
                    display: flex;
-                   height: 70px;
+                   flex-wrap: wrap;
+                //    height: 70px;
                    padding: 5px 0;
                    .left_img{
                        margin: 0 5px 0 0;
@@ -136,9 +144,9 @@ img{
                        height: 100%;
                    }
                    .right_text{
-                       flex: 1;
                        line-height: 25px;
                        font-size: 12px;
+                       color: #999;
                    }
                }
            }

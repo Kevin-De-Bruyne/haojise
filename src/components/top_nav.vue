@@ -1,5 +1,6 @@
 <template>
     <div class="top_nav_box" ref="topnav" :class="{'fiex':top_flex||black}">
+        
         <div class="h-60 header_box ">
             <img class="logo_img" src="../assets/logo.png" alt="">
         <div class="right-item hide_850">
@@ -105,7 +106,7 @@ export default {
                 }
 				window.addEventListener('scroll',(e)=>{
                    
-                     scrollTop = document.documentElement.scrollTop;
+                     scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset;
                      if(scrollTop>=30){
                        this.top_flex=true
                    }else{

@@ -2,9 +2,9 @@
   <div class="content">
     <div class="banner_box">
       <top-nav />
-      <div class="top_butn">采购资讯</div>
+      <div class="top_butn" @click="gobottom()">采购资讯</div>
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="item in swiper_arr" :key="item">
+        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
           <img :src="item" alt="" />
         </van-swipe-item>
       </van-swipe>
@@ -86,7 +86,10 @@
       </div>
     </div>
 
-    <div class="form-box">
+    <div class="title_map">全国销售点</div>
+    <div id="main" class="hidde_1375" :style="{width: '100%', height: '500px'}"></div>
+
+    <div class="form-box" ref="form_height">
       <div class="title">
         <span> 采购咨询 </span>
       </div>
@@ -205,6 +208,9 @@
 
 <script>
 import topNav from "@/components/top_nav";
+import echarts from 'echarts'
+import '../../node_modules/echarts/map/js/china.js'
+
 export default {
   data() {
     return {
@@ -251,6 +257,68 @@ export default {
       ],
     };
   },
+  mounted() {
+     this.mapInit()
+
+  },
+  methods: {
+    mapInit(){
+        function randomData() {  
+                return Math.round(Math.random()*500);  
+            } 
+      var option = {  
+              tooltip: {},
+                 legend: {
+                            orient: 'vertical',
+                            left: 'center',
+                            top:'middle',
+                            data:['']
+                        },      
+                 selectedMode: 'single',
+                 series : [                         
+                            {
+                              zoom:1.2,
+                              name: '', 
+                              type: 'map',
+                              mapType: 'china',
+                              itemStyle: {
+                                   borderColor: 'rgba(0, 0, 0, 0.2)'
+                                },
+                                label: {
+                                    normal: {
+                                        show: true
+                                    }
+                                },
+                                data:[
+                                   {name: '新疆',value:1},               
+                                     {name: '北京',value: 1},
+                                      {name: '天津',value: 1 },
+                                      {name: '上海',value:1 },
+                                      {name: '重庆',value: 1 },
+                                      {name: '河北',value: 1 },
+                                      {name: '河南',value: 1 },
+                                      {name: '云南',value: 1 },
+                                ]
+                            }
+                        ]
+               }
+        let map=document.querySelector('#main')
+    // let map=this.$refs.map
+    var myChart = echarts.init(map);
+        // 指定图表的配置项和数据
+
+        // 使用刚指定的配置项和数据显示图表。
+        if (option && typeof option === "object") {
+           myChart.setOption(option, true);
+        }
+    },
+    gobottom(){
+       window.scrollTo({ 
+                top: this.$refs.form_height.offsetTop-100, 
+                behavior: "smooth" 
+      });
+    }
+  },
   components: {
     topNav,
   },
@@ -258,6 +326,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 1375px){
+    .hidde_1375{
+      // display: none !important;
+    }
+}
 .form-box{
   box-sizing: border-box;
   padding: 6% 4% 4% 4%;
@@ -280,10 +353,11 @@ export default {
     margin: 40px auto 0 auto;
     background-color: #fdd903;
     color: #333;
+    cursor: pointer;
 
   }
   .title{
-     width: 40%;
+     width: 50%;
      margin: 0 auto 20px auto;
      border-bottom: 1px solid #dcdcdc;
      text-align: center;
@@ -331,6 +405,13 @@ export default {
     }
   }
 }
+.title_map {
+    color: #000;
+    text-align: center;
+    font-size: 28px;
+    background: white;
+    padding: 10px 0 20px 0;
+  }
 .pingjia_box {
   background: white;
   box-sizing: border-box;
@@ -441,8 +522,9 @@ export default {
     height: auto !important;
   }
   .top_butn {
+    cursor: pointer;
     position: absolute;
-    bottom: 90px;
+    bottom: 15%;
     left: 50%;
     transform: translateX(-50%);
     width: 170px;

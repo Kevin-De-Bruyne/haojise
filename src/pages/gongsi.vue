@@ -1,12 +1,13 @@
 <template>
-    <div class="content">
-          <div class="banner_box">
+    <div class="content" ref="content">
+          <div class="banner_box" ref="banner">
             <top-nav />
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
           <img
             :src="item"
             alt=""
+            @load="img_load"
           />
         </van-swipe-item>
       </van-swipe>
@@ -21,7 +22,7 @@
          </ul>
      </div>
      
-     <div class="top_fiex hidden-sm-and-down" ref="top_heihgt">
+     <div class="top_fiex hidden-sm-and-down" ref="top_heihgt" v-if="swiper_arr">
              <ul class="container">
              <li v-for="(item,index) in top_arr" :key="index" :class="{'top_choise':top_index==index}" @click="change_index(index)">
                  <span>
@@ -73,7 +74,7 @@
           公司团队
         </div>
         <el-row class="huodong-box" :gutter="10">
-  <el-col :sm="6" :xs="12" class="item" v-for="item in 4" :key="item">
+  <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in 4" :key="index">
     <div class="top">
               <img src="https://iph.href.lu/380x180?text=1.6%3A1&fg=666666&bg=cccccc" alt="">
             </div>
@@ -98,7 +99,7 @@
           看看***怎么说
         </div>
         <el-row class="pl_box2" >
-          <el-col :sm="12" :xs="24"  v-for="item in 4" :key="item">
+          <el-col :sm="12" :xs="24"  v-for="(item,index) in 4" :key="index">
             <div class="item">
               <div class="left_img">
               <img src="https://iph.href.lu/100x100?text=1%3A1&fg=666666&bg=cccccc" alt="">
@@ -134,7 +135,7 @@
           </div>
         </div>
         <el-row class="img-box"  :gutter="20">
-          <el-col v-for="item in 4" :key="item" :sm="6" :xs="12">
+          <el-col v-for="(item,index) in 4" :key="index" :sm="6" :xs="12">
             <img  src="https://iph.href.lu/216x272?text=1.2%3A1&fg=666666&bg=cccccc" alt="">
           </el-col>
         </el-row>
@@ -149,7 +150,7 @@
          
          <div class="card_box">
            <div class="choise_box">
-             <div class="item" v-for="(item,index) in choise_arr" :key="item"
+             <div class="item" v-for="(item,index) in choise_arr" :key="index"
              :class="{'choise_style':index==card_index}" @click="card_index=index"
              >
                {{item}}
@@ -157,7 +158,7 @@
            </div>
 
            <div class="card_img1">
-             <div v-for="(item,index) in 3" :key="item">
+             <div v-for="(item,index) in 3" :key="index">
                <div class="item" v-show="index==card_index">
                 <img src="https://iph.href.lu/826x415?text=2%3A1&fg=666666&bg=cccccc" alt="">
               </div>
@@ -172,7 +173,7 @@
           <div class="title">
             FAQ常见问题
           </div>
-          <div class="item" v-for="item in wenti_arr" :key="item">
+          <div class="item" v-for="(item,index) in wenti_arr" :key="index">
              
           <div class="wenti-top">
             <span class="icon" @click="item.shows=!item.shows" :class="{'jian_show':item.shows}">
@@ -206,6 +207,7 @@ export default {
     },
     data(){
         return{
+          add:false,
           wenti_arr:[
             {
              title:'好吉色的核心业务是什么?',
@@ -288,10 +290,40 @@ export default {
        }
     },
     methods: {
+      none(){
+
+      },
+      img_load(){
+        if(this.add){
+          return
+        }
+        this.add=true
+           let timel=null
+                      let height=this.$refs.top_heihgt.offsetTop
+           window.addEventListener('scroll',(e)=>{
+                    let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
+        if(scrollTop>=height-60){
+                       this.top_flex=true
+                   }else{
+                       this.top_flex=false
+                   }
+                    if(timel){
+                      clearTimeout(timel)
+                      timel=setTimeout(this.fn,20)
+                    }else{
+                      timel=setTimeout(this.fn,20)
+                    }
+                    
+                   
+                   
+                    
+              
+				},true)
+      },
       fn(){
         
                  
-        let scrollTop = document.documentElement.scrollTop;
+        let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
       
         for(let i=0;i<this.height_arr.length;i++){
                       // console.log(i)
@@ -313,27 +345,7 @@ export default {
       },
       scroll(){
        this.$nextTick(()=>{
-                let timel=null
-                      let height=this.$refs.top_heihgt.offsetTop
-           window.addEventListener('scroll',(e)=>{
-                    let scrollTop = document.documentElement.scrollTop;
-        if(scrollTop>=height-60){
-                       this.top_flex=true
-                   }else{
-                       this.top_flex=false
-                   }
-                    if(timel){
-                      clearTimeout(timel)
-                      timel=setTimeout(this.fn,20)
-                    }else{
-                      timel=setTimeout(this.fn,20)
-                    }
-                    
-                   
-                   
-                    
-              
-				},true)
+               
         })
        
       }
@@ -342,28 +354,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.content{
+  overflow: hidden;
+}
+.my-swipe{
+  // height: 500px;
+}
 .jian_show{
       background-position: 0 -133px !important;
 }
-    .wenti-enter-active,
-    .wenti-leave-active{
-        will-change: transform;
-        transition: all .3s ease;
-        max-height: 150px;
-        overflow: hidden;
-    }
-    .wenti-enter{
-      max-height: 0 !important;
-        padding: 0 !important;
-    }
-    .wenti-enter-to{
-       max-height: 150px !important;
-        padding: 3% !important;
-    }
-    .wenti-leave-active{
-        max-height: 0 !important;
-        padding: 0 !important;
-    }
+    // .wenti-enter-active,
+    // .wenti-leave-active{
+    //     will-change: transform;
+    //     transition: all .3s ease;
+    //     max-height: 150px;
+    //     overflow: hidden;
+    // }
+    // .wenti-enter{
+    //   max-height: 0 !important;
+    //     padding: 0 !important;
+    // }
+    // .wenti-enter-to{
+    //    max-height: 150px !important;
+    //     padding: 3% !important;
+    // }
+    // .wenti-leave-active{
+    //     max-height: 0 !important;
+    //     padding: 0 !important;
+    // }
    
     
 .fiex2{
@@ -392,6 +410,7 @@ export default {
         width: 58px;
         height: 100%;
         display: inline-block;
+        cursor: pointer;
       }
       .texts{
         display: inline-block;
@@ -428,6 +447,7 @@ export default {
       display: flex;
       height: 60px;
       background: white;
+      margin: 0 0 1px 0;
       .item{
         height: 100%;
         display: flex;
@@ -446,7 +466,7 @@ export default {
   }
   .card_img1{
     .item{
-      height: 415px;
+      // height: 415px;
       display: flex;
       img{
         width: 100%;

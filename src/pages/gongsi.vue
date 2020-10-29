@@ -1,17 +1,5 @@
 <template>
     <div class="content" ref="content">
-          <div class="banner_box" ref="banner">
-            <top-nav />
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
-          <img
-            :src="item"
-            alt=""
-            @load="img_load"
-          />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
     <div class="top_fiex fiex2 hidden-sm-and-down" ref="top_fiex2" v-show="top_flex">
              <ul class="container">
              <li v-for="(item,index) in top_arr" :key="index" :class="{'top_choise':top_index==index}" @click="change_index(index)">
@@ -22,7 +10,7 @@
          </ul>
      </div>
      
-     <div class="top_fiex hidden-sm-and-down" ref="top_heihgt" v-if="swiper_arr">
+     <div class="top_fiex hidden-sm-and-down" ref="top_heihgt">
              <ul class="container">
              <li v-for="(item,index) in top_arr" :key="index" :class="{'top_choise':top_index==index}" @click="change_index(index)">
                  <span>
@@ -37,22 +25,23 @@
        <div class="container">
           <div class="title-box">
          <div class="text1">
-             好吉色
+             {{data.company_profile.title_one}}
          </div>
-         <div class="text2">
-             我们是一家人工智能机器人解决方案的高科技研发公司，创始团队来自剑桥和麻省理工。是智能洗车行业最早发起者、无人化智能洗车场景模式发明者。
+         <div class="text2" v-html="data.company_profile.content">
+
          </div>
      </div>
 
      
-     <carousel-3d  :autoplay="true">
-　　<slide v-for="(slide, i) in 6" :key="i" :index="i">
+     <carousel-3d class="swiper_3d" :autoplay="true" v-if="data.company_profile.images.length">
+　　<slide v-for="(slide, i) in data.company_profile.images" :key="slide.id" :index="i">
 　　　　<template slot-scope="{ index, isCurrent, leftIndex, rightIndex}">
-　　　　　　<img
-　　　　　　:data-index="index"
+  <div class="img-box" :style="{backgroundImage:`url(${slide})`}"
+   :data-index="index"
 　　　　　　:class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >=0)}"
-　　　　　　src="https://iph.href.lu/362x272?text=1.3%3A1&fg=666666&bg=cccccc"
-　　　　　　>
+  >
+
+  </div>
 　　　</template>
 　　</slide>
 </carousel-3d>
@@ -60,10 +49,10 @@
 
         <div class="touzi-box">
             <div class="touzi-title">
-               投资方
+               {{data.company_profile.title_two}}
             </div>
             <div class="touzi-img">
-              <img src="https://source.1kmxc.com/static-web-new/website/images3.0/about/ygl_Investor.png" alt="">
+              <img :src="data.company_profile.path" alt="">
             </div>
         </div>
      </div>
@@ -74,12 +63,12 @@
           公司团队
         </div>
         <el-row class="huodong-box" :gutter="10">
-  <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in 4" :key="index">
+  <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in data.company_team" :key="index">
     <div class="top">
-              <img src="https://iph.href.lu/380x180?text=1.6%3A1&fg=666666&bg=cccccc" alt="">
+              <img :src="item.path" alt="">
             </div>
             <div class="bottom">
-                宣传部
+                {{item.name}}
             </div>
   </el-col>
 </el-row>
@@ -93,26 +82,25 @@
           好吉色用户评价
         </div>
         <div class="img-box">
-          <img src="https://iph.href.lu/380x180?text=%E9%9A%8F%E6%84%8F%E5%A4%A7%E5%B0%8F&fg=666666&bg=cccccc" alt="">
+          <img :src="data.user_evaluation" alt="">
         </div>
         <div class="title">
           看看***怎么说
         </div>
         <el-row class="pl_box2" >
-          <el-col :sm="12" :xs="24"  v-for="(item,index) in 4" :key="index">
+          <el-col :sm="12" :xs="24"  v-for="(item,index) in data.evaluate" :key="index">
             <div class="item">
-              <div class="left_img">
-              <img src="https://iph.href.lu/100x100?text=1%3A1&fg=666666&bg=cccccc" alt="">
+              <div class="left_img" :style="{backgroundImage:`url(${item.out_path})`}">
             </div>
-            <div class="right">
+            <div class="rights">
               <div class="text1">
-                可以，俺自从投了你们这个好吉色啊，三年车有了，十年房有了，俺看你们这个好吉色行
+                  {{item.inside_text}}
               </div>
               <div class="text2">
                 <div class="left">
-                  浙江省温州市
+                  {{item.address}}
                 </div>
-                <div class="right">
+                <div class="right" @click="goDetail(item)">
                   阅读
                 </div>
               </div>
@@ -131,12 +119,12 @@
             专业检测机构检测
           </div>
           <div class="text2">
-            通过专业机构的权威检测
+            {{data.org.title}}
           </div>
         </div>
         <el-row class="img-box"  :gutter="20">
-          <el-col v-for="(item,index) in 4" :key="index" :sm="6" :xs="12">
-            <img  src="https://iph.href.lu/216x272?text=1.2%3A1&fg=666666&bg=cccccc" alt="">
+          <el-col v-for="(item,index) in data.org.path" :key="index" :sm="6" :xs="12">
+            <img  :src="item" alt="">
           </el-col>
         </el-row>
       </div>
@@ -150,17 +138,17 @@
          
          <div class="card_box">
            <div class="choise_box">
-             <div class="item" v-for="(item,index) in choise_arr" :key="index"
+             <div class="item" v-for="(item,index) in data.env_sci" :key="index"
              :class="{'choise_style':index==card_index}" @click="card_index=index"
              >
-               {{item}}
+               {{item.name}}
              </div>
            </div>
 
            <div class="card_img1">
-             <div v-for="(item,index) in 3" :key="index">
+             <div v-for="(item,index) in data.env_sci" :key="index">
                <div class="item" v-show="index==card_index">
-                <img src="https://iph.href.lu/826x415?text=2%3A1&fg=666666&bg=cccccc" alt="">
+                <img :src="item.path" alt="">
               </div>
              </div>
            </div>
@@ -173,19 +161,18 @@
           <div class="title">
             FAQ常见问题
           </div>
-          <div class="item" v-for="(item,index) in wenti_arr" :key="index">
+          <div class="item" v-for="(item,index) in data.problem" :key="index">
              
           <div class="wenti-top">
             <span class="icon" @click="item.shows=!item.shows" :class="{'jian_show':item.shows}">
               
             </span>
             <span class="texts">
-              好吉色的核心业务是什么?
+              {{item.problem}}
             </span>
           </div>
           <transition name="wenti">
-             <div class="bottom_text" v-show="item.shows">
-               {{item.content}}
+             <div class="bottom_text" v-show="item.shows" v-html="item.answer">
           </div>
           </transition>
          
@@ -276,20 +263,49 @@ export default {
       },
              swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
              top_arr:['公司简介','公司团队','客户评价','专利证书','办公环境','常见问题'],
+             data:{
+               company_profile:{
+                 images:[]
+               },
+               company_team:[],
+                env_sci:[],
+                evaluate:[],
+                org:{
+                  path:[]
+                },
+                problem:[]
+             }
         }
     },
     created() {
+      this.getdata()
       this.scroll()
     },
     mounted() {
       let height=null
-    
+       console.log()
        for(let i=1;i<=6;i++){
           height=this.$refs['flex_'+i].offsetTop
           this.height_arr.push(height)
        }
     },
     methods: {
+      goDetail(item){
+        let json=JSON.stringify(item)
+        localStorage.setItem('news',json)
+        this.$router.push('/news_detail')
+      },
+      getdata(){
+        this.ajax({
+          url:'index/index/enter_haojise'
+        }).then(res=>{
+            this.data=res.data
+            this.img_load()
+            this.data.problem.forEach(item=>{
+              this.$set(item,'shows',false)
+            })
+        })
+      },
       none(){
 
       },
@@ -313,22 +329,18 @@ export default {
                     }else{
                       timel=setTimeout(this.fn,20)
                     }
-                    
-                   
-                   
-                    
-              
 				},true)
       },
       fn(){
         
-                 
+          
         let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
       
         for(let i=0;i<this.height_arr.length;i++){
                       // console.log(i)
                       if(scrollTop>this.height_arr[i]+outerHeight/2&&scrollTop<this.height_arr[i+1]+outerHeight/2){
                           this.top_index=i
+                          console.log(i)
                       }else if(scrollTop>this.height_arr[i]+outerHeight/2&&!this.height_arr[i+1]){
                           this.top_index=this.height_arr.length-1
                       }
@@ -354,6 +366,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.swiper_3d{
+  .img-box{
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    padding: 0 0 100% 0;
+  }
+}
 .content{
   overflow: hidden;
 }
@@ -383,7 +403,9 @@ export default {
     //     padding: 0 !important;
     // }
    
-    
+    .carousel-3d-slide{
+      border: none !important;
+    }
 .fiex2{
     position: fixed !important;
     top: 60px !important;
@@ -525,12 +547,16 @@ export default {
         width: 100px;
         height: 100px;
         margin: 0 3% 0 0;
-        flex: 1 0 auto;
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        // flex: 1 0 auto;
       }
-      .right{
+      .rights{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        flex: 1;
         .text1{
           font-size: 18px;
         }
@@ -592,9 +618,12 @@ export default {
   }
   .touzi-img{
     display: flex;
-    height: 110px;
+    // height: 110px;
+    align-items: center;
+    justify-content: center;
     img{
-      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 }

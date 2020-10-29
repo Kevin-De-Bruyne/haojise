@@ -1,31 +1,20 @@
 <template>
     <div class="content">
-        <div class="banner_box">
-            <top-nav />
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
-          <img
-            :src="item"
-            alt=""
-          />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
         <div class="gray-box">
             <div class="container">
                 <el-row :gutter="20">
-                    <el-col :sm="6" :xs="12"  v-for="item in 20" :key="item"
+                    <el-col :sm="6" :xs="12"  v-for="item in data" :key="item"
                     @click.native="goDetail(item)"
                     >
                         <div class="item">
                             <div class="top_img">
-                            <img src="https://source.1kmxc.com/Big/Uploads/20200930/59c419cf-8958-46ea-acdc-c877b5ef3607.jpg" alt="">
+                                <img :src="item.big_img" alt="">
                         </div>
                         <div class="text">
-                            驿公里智能洗车 主打无人化黑科技
+                             {{item.center_text}}
                         </div>
                         <div class="bottom-logo">
-                            <img src="https://cdn.1kmxc.com/static-web-new/website/images3.0/article/media-logo/china.png" alt="">
+                            <img :src="item.mini_img" alt="">
                         </div>
                         </div>
                     </el-col>
@@ -43,11 +32,25 @@ export default {
     },
     data(){
         return{
+            data:[],
             swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
         }
     },
+    created() {
+        this.getdata()
+    },
     methods: {
+        getdata(){
+            this.ajax({
+                url:'index/index/news_info'
+            }).then(res=>{
+                this.data=res.data
+            })
+        },
         goDetail(item){
+            let json=JSON.stringify(item)
+            localStorage.setItem('news',json)
+            console.log(JSON.parse(localStorage.getItem('news')))
             this.$router.push('/news_detail')
         }
     },
@@ -69,6 +72,14 @@ export default {
         .text{
             box-sizing: border-box;
             padding: 0 10px;
+            overflow:hidden; 
+text-overflow:ellipsis;
+display:-webkit-box; 
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2; 
+width: 100%;
+height: 42px;
+font-size: 14px;
         }
         .bottom-logo{
             height: 40px;

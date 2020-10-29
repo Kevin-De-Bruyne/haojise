@@ -1,59 +1,49 @@
 <template>
   <div class="content">
-    <div class="banner_box">
-      <top-nav />
-      <div class="top_butn" @click="gobottom()">采购资讯</div>
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
-          <img :src="item" alt="" />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
+    <!-- <top-nav @gobottom="gobottom"  />   -->
 
     <div class="shichang-box">
       <div class="container-min">
         <div class="title-box">
-          <div class="text1">我们的销售市场</div>
-          <div class="text2">当代年轻人不良的生活习惯,熬夜丶看比赛丶嫖娼</div>
+          <div class="text1">{{data.sales_market.title}}</div>
+          <div class="text2">{{data.sales_market.content}}</div>
         </div>
         <el-row class="img-box" :gutter="20">
           <el-col
-            v-for="(item, index) in jiejue_arr"
+          class="items"
+            v-for="(item, index) in data.sales_market.con_img"
             :sm="8"
-            :xs="8"
+            :xs="12"
             :key="index"
           >
-            <div class="top">
-              <img :src="item.img" alt="" />
+            <div class="top" :style="{backgroundImage: `url(${item.img_path})`}">
+              <!-- <img :src="item.img_path" alt="" /> -->
             </div>
             <div class="bottom">
-              {{ item.name }}
+              {{ item.center_text }}
             </div>
           </el-col>
         </el-row>
       </div>
     </div>
 
-    <div class="jiejue-box">
+    <div class="jiejue-box" >
       <div class="container-min">
         <div class="title-box">
-          <div class="text1">我们解决的痛点(优势，人体作用)</div>
+          <div class="text1">{{data.our_strengths.title}}</div>
           <div class="text2">
-            营养丰富，蛋白质是牛肉的六倍。滋阴补阳，秒杀脑白金等保健品
+            {{data.our_strengths.content}}
           </div>
         </div>
         <el-row :gutter="20">
           <el-col
-            class=""
             :sm="8"
             :xs="8"
-            v-for="(item, index) in 3"
+            v-for="(item, index) in data.our_strengths.path"
             :key="index"
           >
-            <img
-              src="http://iph.href.lu/432x592?text=3%E5%BC%A0%E7%9B%B8%E5%90%8C%E6%AF%94%E4%BE%8B%E7%9A%84%E5%9B%BE&fg=666666&bg=cccccc"
-              alt=""
-            />
+          <div class="img-box" :style="{backgroundImage:`url(${item})`}">
+          </div>
           </el-col>
         </el-row>
       </div>
@@ -63,21 +53,18 @@
       <div class="container">
         <div class="title">看看***怎么说</div>
         <el-row class="pl_box2">
-          <el-col :sm="12" :xs="24" v-for="item in 4" :key="item">
+          <el-col :sm="12" :xs="24" v-for="(item,index) in data.evaluate" :key="index">
             <div class="item">
-              <div class="left_img">
-                <img
-                  src="https://iph.href.lu/100x100?text=1%3A1&fg=666666&bg=cccccc"
-                  alt=""
-                />
+              <div class="left_img" :style="{backgroundImage:`url(${item.out_path})`}">
+                
               </div>
-              <div class="right">
+              <div class="rights">
                 <div class="text1">
-                  可以，俺自从投了你们这个好吉色啊，三年车有了，十年房有了，俺看你们这个好吉色行
+                  {{item.out_text}}
                 </div>
                 <div class="text2">
-                  <div class="left">浙江省温州市</div>
-                  <div class="right">阅读</div>
+                  <div class="left">{{item.address}}</div>
+                  <div class="right" @click="goDetail(item)">阅读</div>
                 </div>
               </div>
             </div>
@@ -87,11 +74,11 @@
     </div>
 
     <div class="title_map">全国销售点</div>
-    <div id="main" class="hidde_1375" :style="{width: '100%', height: '500px'}"></div>
+    <div id="main" class="hidde_1375" :style="{width: '100%', height: '800px'}"></div>
 
     <div class="form-box" ref="form_height">
       <div class="title">
-        <span> 采购咨询 </span>
+        <span id="caigou"> 采购咨询 </span>
       </div>
 
       <div class="form">
@@ -101,44 +88,51 @@
         <el-row :gutter="20">
           <el-col :sm="8" :xs="24">
             <div class="text">姓名</div>
-            <input type="text" placeholder="请输入您的姓名" />
+            <input type="text" v-model="user.name" placeholder="请输入您的姓名" />
           </el-col>
           <el-col :sm="8" :xs="24">
             <div class="text">手机号</div>
-            <input type="text" placeholder="请输入您的手机号" />
+            <input type="text" v-model="user.phone" placeholder="请输入您的手机号" />
           </el-col>
           <el-col :sm="8" :xs="24">
             <div class="text">意向区域</div>
             <el-row :gutter="10">
               <el-col :sm="8" :xs="8">
-                <el-select v-model="city_data" placeholder="请选择省">
+                <el-select v-model="shen_id" placeholder="请选择省"
+                @change="shen_change"
+                >
               <el-option
-                v-for="item in city_arr"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="(item,index) in shen_arr"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
               >
               </el-option>
             </el-select>
               </el-col>
             <el-col :sm="8" :xs="8">
-               <el-select  v-model="city_data" placeholder="请选择市">
+               <el-select  v-model="city_id" placeholder="请选择市"
+               @change="city_change"
+               >
               <el-option
-                v-for="item in city_arr"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="(item,index) in city_arr"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
+               
               >
               </el-option>
             </el-select>
             </el-col>
             <el-col :sm="8" :xs="8">
-              <el-select  v-model="city_data" placeholder="请选择区/县">
+              <el-select  v-model="area_id" placeholder="请选择区/县"
+              
+              >
               <el-option
-                v-for="item in city_arr"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="(item,index) in area_arr"
+                :key="index"
+                :label="item.name"
+                :value="item.id"
               >
               </el-option>
             </el-select>
@@ -153,10 +147,10 @@
             <div class="text">
               籍贯
             </div>
-            <el-select v-model="jiguan_data" placeholder="请选择">
+            <el-select v-model="user.jiguan_data" placeholder="请选择">
               <el-option
-                v-for="item in jiguan_arr"
-                :key="item.value"
+                v-for="(item,index) in jiguan_arr"
+                :key="index"
                 :label="item.label"
                 :value="item.value"
               >
@@ -168,7 +162,7 @@
               <div class="text">
                 职业
               </div>
-              <input type="text" placeholder="请输入您的职业">
+              <input type="text" v-model="user.zhiye" placeholder="请输入您的职业">
           </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -176,7 +170,7 @@
             <div class="text">
               公司名称
             </div>
-            <input type="text" placeholder="请输入您的公司名称">
+            <input type="text" v-model="user.gongsi" placeholder="请输入您的公司名称">
           </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -185,19 +179,19 @@
             性别
           </div>
           <div class="sx-box">
-            <el-radio v-model="sex_radio" label="1">男</el-radio>
-            <el-radio v-model="sex_radio" label="2">女</el-radio>
+            <el-radio v-model="user.sex_radio" label="1">男</el-radio>
+            <el-radio v-model="user.sex_radio" label="2">女</el-radio>
           </div>
           </el-col>
           
         </el-row>
         <el-row :gutter="20">
           <el-col>
-            <textarea name="" class="beizhu" placeholder="详细描述您的情况，及合作意向，我们会尽快给您回复" v-model="submit.content" id="" cols="30" rows="10"></textarea>
+            <textarea name="" class="beizhu" placeholder="详细描述您的情况，及合作意向，我们会尽快给您回复" v-model="user.content" id="" cols="30" rows="10"></textarea>
           </el-col>
         </el-row>
 
-        <div class="butn">
+        <div class="butn" @click="submit()">
           提交
         </div>
         </div>
@@ -213,9 +207,16 @@ import '../../node_modules/echarts/map/js/china.js'
 
 export default {
   data() {
+    
+BizQQWPA.addCustom({
+    aty: '0', //指定工号类型,0-自动分流，1-指定工号，2-指定分组
+    nameAccount: '1069617130', //指定的聊天 QQ 号码
+    selector: 'contactQQ' //触发聊天的标签id
+});
     return {
-      submit:{},
-      sex_radio:'1',
+      user:{
+        sex_radio:'1'
+      },
       jiguan_arr:[
         {
           value:1,
@@ -230,22 +231,6 @@ export default {
           label:'北京'
         },
       ],
-      jiguan_data:'',
-      city_arr:[
-        {
-          value:0,
-          label:'北京'
-        },
-         {
-          value:1,
-          label:'上海'
-        },
-         {
-          value:3,
-          label:'广州'
-        }
-      ],
-      city_data:'',
       swiper_arr: [
         require("../assets/swiper.jpg"),
         require("../assets/swiper.jpg"),
@@ -255,17 +240,92 @@ export default {
         { name: "频繁的性生活", img: require("../assets/jiaoji.jpg") },
         { name: "某26岁程序员", img: require("../assets/it.jpg") },
       ],
+      data:{
+        evaluate:[],
+        our_strengths:{},
+        sales_market:{},
+        sales_office:[]
+      },
+      map_data:[],
+      shen_arr:[],
+       city_arr:[],
+      area_arr:[],
+      shen_id:'',
+      city_id:'',
+      area_id:''
     };
   },
   mounted() {
-     this.mapInit()
-
+     
+  },
+  created() {
+    
+    this.getdata()
+    this.getshen()
   },
   methods: {
+    goDetail(item){
+      let json=JSON.stringify(item)
+      this.$router.push('/news_detail?data='+json)
+    },
+    getshen(){
+      this.ajax({
+        url:'index/index/get_province'
+      }).then(res=>{
+        this.shen_arr=res.province
+      })
+    },
+    shen_change(){
+        this.ajax({
+          url:'index/index/get_city',
+          data:{
+            id:this.shen_id
+          }
+        }).then(res=>{
+           this.city_arr=res.city
+        })
+    },
+    city_change(){
+        this.ajax({
+          url:'index/index/get_district',
+          data:{
+            id:this.city_id
+          }
+        }).then(res=>{
+            this.area_arr=res.district
+        })
+    },
+    submit(){
+      let {user}=this
+      this.ajax({
+        url:'index/index/pro_con',
+        data:{
+                 name:user.name,
+mobile:user.phone,
+pid:this.shen_id,
+cid:this.city_id,
+did:this.area_id,
+native_place:user.jiguan_data,
+occupation:user.zhiye,
+corporate_name:user.gongsi,
+sex:user.sex_radio,
+describe:user.content
+        }
+      }).then(res=>{
+          this.$toast('提交成功')
+      })
+    },
+    getdata(){
+      this.ajax({
+        url:'index/index/recruitment'
+      }).then(res=>{
+        this.data=res.data
+        this.map_data=this.data.sales_office
+        
+        this.mapInit()
+      })
+    },
     mapInit(){
-        function randomData() {  
-                return Math.round(Math.random()*500);  
-            } 
       var option = {  
               tooltip: {},
                  legend: {
@@ -282,23 +342,15 @@ export default {
                               type: 'map',
                               mapType: 'china',
                               itemStyle: {
-                                   borderColor: 'rgba(0, 0, 0, 0.2)'
+                                   borderColor: 'rgba(0, 0, 0, 0.2)',
+                                   areaColor:'rgb(253,217,3)'
                                 },
                                 label: {
                                     normal: {
                                         show: true
                                     }
                                 },
-                                data:[
-                                   {name: '新疆',value:1},               
-                                     {name: '北京',value: 1},
-                                      {name: '天津',value: 1 },
-                                      {name: '上海',value:1 },
-                                      {name: '重庆',value: 1 },
-                                      {name: '河北',value: 1 },
-                                      {name: '河南',value: 1 },
-                                      {name: '云南',value: 1 },
-                                ]
+                                data:this.map_data
                             }
                         ]
                }
@@ -311,6 +363,9 @@ export default {
         if (option && typeof option === "object") {
            myChart.setOption(option, true);
         }
+        if(this.$route.query.scroll){
+      this.gobottom()
+    }
     },
     gobottom(){
        window.scrollTo({ 
@@ -425,6 +480,7 @@ export default {
   .img-box {
     display: flex;
     margin: 0 0 10% 0;
+    
     img {
       margin: auto;
     }
@@ -443,12 +499,15 @@ export default {
         width: 100px;
         height: 100px;
         margin: 0 3% 0 0;
-        flex: 1 0 auto;
+        background-size: cover;
+        background-position: 50%;
+            background-repeat: no-repeat;
       }
-      .right {
+      .rights {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        flex: 1;
         .text1 {
           font-size: 18px;
         }
@@ -472,6 +531,12 @@ export default {
   background: rgb(252, 240, 221);
   box-sizing: border-box;
   padding: 6% 4% 4% 4%;
+  .img-box{
+    background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 100%;
+  }
   .title-box {
     margin: 0 0 8% 0;
     text-align: center;
@@ -499,8 +564,13 @@ export default {
       font-size: 16px;
     }
   }
-  .top {
-  }
+ .top{
+         width: 100%;
+         padding-bottom: 100%;
+         background-position: 50%;
+         background-repeat: no-repeat;
+    background-size: cover;
+       }
   .bottom {
     text-align: center;
     margin: 15px 0 0 0;
@@ -508,11 +578,14 @@ export default {
     padding: 0 10px;
     font-size: 14px;
     text-align: center;
+    height: 50px;
+
   }
 }
 .container-min {
   max-width: 850px;
   margin: auto;
+  
 }
 .banner_box {
   position: relative;
@@ -521,21 +594,6 @@ export default {
     width: 100% !important;
     height: auto !important;
   }
-  .top_butn {
-    cursor: pointer;
-    position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 170px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 7px;
-    background-color: #fdd903;
-    color: #333;
-    box-shadow: 0 12px 14px 0 rgba(245, 166, 35, 0.3);
-    z-index: 99;
-  }
+ 
 }
 </style>

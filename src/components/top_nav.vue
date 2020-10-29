@@ -1,5 +1,10 @@
 <template>
-    <div class="top_nav_box" ref="topnav" :class="{'fiex':top_flex||black}">
+<div class="banner_box">
+    <div class="butn top_butn" v-if="$route.path=='/hezuo'" @click="gobottom()">
+            采购咨询
+        </div>
+        
+      <div class="top_nav_box" ref="topnav" :class="{'fiex':top_flex||black}">
         
         <div class="h-60 header_box ">
             <img class="logo_img" src="../assets/logo.png" alt="">
@@ -30,7 +35,7 @@
             </div>
             <div class="meun-list">
                 <div class="item" v-for="item in top_arr" :key="item.name"
-                @click="$route.path==item.path?none():$router.push(item.path)" 
+                @click="gopush(item)" 
                 :class="{'choise_class2':$route.path==item.path}"
                 >
                     {{item.name}}
@@ -45,6 +50,17 @@
        
         
     </div>
+      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="(item,index) in data.banner" :key="index">
+          <img
+            :src="item.path"
+            alt=""
+            @load="img_load"
+          />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    
 </template>
 
 <script>
@@ -52,6 +68,7 @@ export default {
     props:['black'],
     data(){
         return{
+            data:{},
             nav_show:false,
             top_arr:[
                 {
@@ -79,6 +96,8 @@ export default {
         }
     },
     created() {
+
+        this.getdata()
         let ct=document.documentElement.scrollTop
         if(ct>=30){
             this.top_flex=true
@@ -86,6 +105,7 @@ export default {
         this.scroll()
     },
     mounted() {
+        
         if(this.black){
             let nav=this.$refs.topnav
             let z='rgb(0,0,0)'
@@ -94,6 +114,31 @@ export default {
         
     },
     methods: {
+        gopush(item){
+            this.nav_show=false
+            this.$route.path==item.path?'':this.$router.push(item.path)
+        },
+        gobottom(){
+            window.location.hash='#caigou'
+            console.log(this.$refs.form_height)
+       window.scrollTo({ 
+                top: this.$refs.form_height.offsetTop-100, 
+                behavior: "smooth" 
+      });
+    },
+        // gobottom(){
+        //     this.$emit('gobottom')
+        // },
+        img_load(){
+            this.$emit('imgload')
+        },
+        getdata(){
+      this.ajax({
+        url:'index/index/index'
+      }).then(res=>{
+        this.data=res.data
+      })
+    },
          scroll(){
 			console.log(123123)
 			this.$nextTick(()=>{
@@ -133,6 +178,42 @@ export default {
 
 
 <style scoped lang="scss">
+  .butn{
+    width: 170px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 7px;
+    margin: 40px auto 0 auto;
+    background-color: #fdd903;
+    color: #333;
+    cursor: pointer;
+
+  }
+   .top_butn {
+    cursor: pointer;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #fdd903;
+    color: #333;
+    box-shadow: 0 12px 14px 0 rgba(245, 166, 35, 0.3);
+    z-index: 99;
+  }
+.banner_box {
+    position: relative;
+  // height: 500px;
+  img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
 .bg-yy{
     background: rgba(0,0,0,0.4);
     position: fixed;
@@ -231,6 +312,7 @@ export default {
         margin: auto;
        }
         .logo_img{
+            width: auto !important;
             // width: 100px;
             // height: 40px;
             border-radius: 5px;

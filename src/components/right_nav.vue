@@ -2,7 +2,9 @@
     <div class="right_nav_box hidden-sm-and-down">
 
         <div class="item-box" v-if="shows">
-            <div class="item" v-for="item in nav_arr" :key="item.name">
+            <div class="item" v-for="item in nav_arr" :key="item.name"
+            @click="item_cli(item)"
+            >
             <div class="top">
                 <img :src="item.img" alt="">
             </div>
@@ -12,13 +14,18 @@
         </div>
         </div>
         
+   
+
+
     </div>
 </template>
 
 <script>
 export default {
+    props:['data'],
     data(){
         return{
+            form:{},
             shows:false,
             nav_arr:[
                 {
@@ -41,10 +48,12 @@ export default {
                 name:'微信咨询',
                 img:require('../assets/wx.png')
             }
-            ]
+            ],
+            kefu_show:false
         }
     },
     created(){
+        console.log(this.data)
         window.addEventListener('scroll',(e)=>{
                 let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
                 if(scrollTop>200){
@@ -53,7 +62,13 @@ export default {
                     this.shows=false
                 }
 		},true)
-    }
+    },
+    methods: {
+        item_cli(item){
+            this.$emit('cli',item.name)
+            
+        }
+    },
 }
 </script>
 

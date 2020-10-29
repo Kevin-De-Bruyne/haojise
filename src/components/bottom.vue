@@ -1,45 +1,38 @@
 <template>
 <div class="bottom_box">
- <div class="container">
+ <div class="container" v-if="data.down_word">
         <el-row>
 
         
             <el-col :sm="6" class="hidden-sm-and-down" :xs="12">
                 <div class="img-box">
-                    <img src="https://iph.href.lu/200x290?fg=666666&bg=cccccc" alt="">
+                    <img :src="data.down_img" alt="">
                 </div>
             </el-col>
             <el-col :sm="6" :xs="12" class="bottom-box1 bottom-box">
                 <div class="title">
-                    好吉色 好吉色
+                    {{data.down_word.title}}
                 </div>
                 <ul>
-                    <li>fafafafafaf</li>
-                    <li>fafafa</li>
-                    <li>fafafafafaf</li>
-                    <li>fafafafa</li>   
-                    <li>fafa</li>
-                    <li>fafafafafaf</li>
-                    <li>fafafafafaf</li>
-                    <li>fafafafafaf</li>
+                    <li v-for="(item,index) in data.down_word.content" :key="index">{{item}}</li>
                 </ul>
             </el-col>
             <el-col :sm="6" :xs="12" class="bottom-box2 bottom-box">
                 <div class="title">
-                    好吉色好吉色
+                    {{data.down_img_s.title}}
                 </div>
                 <div class="item-box">
-                    <div class="item" v-for="item in 3" :key="item">
+                    <div class="item" v-for="(item,index) in data.down_img_s.content" :key="index">
                         <div class="left_img">
-                            <img src="https://iph.href.lu/100x70?fg=666666&bg=cccccc" alt="">
+                            <img :src="item.above_img" alt="">
                         </div>
                         <div class="right_text">
                             <div class="text1">
-                                好吉色好吉色好吉色好吉色好吉色
+                                {{item.center_text}}
                             </div>
-                            <div class="text2">
+                            <!-- <div class="text2">
                                 好吉色
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -49,13 +42,13 @@
                     好吉色好吉色
                 </div>
                 <div class="item-box">
-                    <div class="item" v-for="item in 2" :key="item">
+                    <div class="item" v-for="(item,index) in data.down_img_word.content" :key="index">
                         <div class="left_img">
-                            <img src="https://iph.href.lu/110x90?fg=666666&bg=cccccc" alt="">
+                            <img :src="item.above_img" alt="">
                         </div>
                         <div class="right_text">
                             <div class="text1">
-                                好吉色好吉色好吉色
+                                {{item.center_text}}
                             </div>
                         </div>
                     </div>
@@ -70,7 +63,23 @@
 
 <script>
 export default {
-    
+    created() {
+        this.getdata()
+    },
+    data(){
+        return{
+            data:{}
+        }
+    },
+    methods: {
+        getdata(){
+            this.ajax({
+                url:'index/index/bottom_data'
+            }).then(res=>{
+                this.data=res.data
+            })
+        }
+    },
 }
 </script>
 

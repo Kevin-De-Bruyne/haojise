@@ -1,20 +1,10 @@
 <template>
-  <div>
-    <div class="banner_box">
-      <top-nav />
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index">
-          <img
-            :src="item"
-            alt=""
-          />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <div class="bg_white p-b-20">
+  <div >
+    
+    <div class="bg_white2 p-b-20">
       <div class="container p-t-20">
-      <div class="text-box">
-        <div class="text1">熬夜加班，就喝好吉色</div>
+      <div class="text-box wow slideInUp">
+        <div class="text1 ">熬夜加班，就喝好吉色</div>
         <div class="text2">
           熬夜加班，就喝好吉色 If you stay up late and work overtime, you'll
           have a good JISE
@@ -22,42 +12,42 @@
       </div>
 
       <el-row class="icon_list" :gutter="20">
-        <el-col class="pd-box-10" v-for="(item,index) in bg_arr" :key="index"
+        <el-col class="pd-box-10" v-for="(item,index) in data.banner_down" :key="index"
         :sm="6" :xs="12" 
         >
            <div class="item">
              <div class="top_item">
                <div class="left">
             <img
-              src="https://iph.href.lu/264x264?text=1%3A1&fg=666666&bg=cccccc"
+              :src="item.monograph"
               alt=""
             />
           </div>
           <div class="right">
-            <div class="text1">
-              {{ item.name }}
-            </div>
+            <!-- <div class="text1">
+              {{ item.intro }}
+            </div> -->
             <div class="text2">
-              {{ item.content }}
+              {{ item.intro }}
             </div>
           </div>
              </div>
           <div class="bottom_item">
             <div class="item-box" >
-          <!-- <div class="img_box" v-if="index%2==0">
-            <img src="https://iph.href.lu/264x264?text=1%3A1&fg=666666&bg=cccccc" alt="" />
-          </div> -->
-          <div class="swipter_box">
+          <div class="img_box" v-if="item.multigraph.length==1">
+            <img :src="item.multigraph[0]" alt="" />
+          </div>
+          <div class="swipter_box" v-else>
             <van-swipe
               class="vant_swipe2 img_100"
               :autoplay="3000"
               indicator-color="white"
               :touchable="true"
             >
-              <van-swipe-item v-for="(item_child,i) in 2" :key="i">
+              <van-swipe-item v-for="(item_child,i) in item.multigraph" :key="i">
                 <img
                 class="img_100j"
-                  src="https://iph.href.lu/50x50?text=1%3A1&fg=666666&bg=cccccc"
+                  :src="item_child"
                   alt=""
                 />
               </van-swipe-item>
@@ -74,11 +64,11 @@
       <div class="choise_box">
           <div class="left">
               <div class="title">
-                  为什么选择好吉色
+                  {{data.sel.title}}
               </div>
-              <div class="neirong">
-                  为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色,
-                  为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色为什么选择好吉色
+              <div class="neirong" v-html="data.sel.content">
+                  
+                  
               </div>
               <div class="butn">
                   查看更多
@@ -92,10 +82,10 @@
               :touchable="true"
               :vertical="true"
             >
-              <van-swipe-item v-for="(item,index) in 4 " :key="index">
+              <van-swipe-item v-for="(item,index) in data.sel.path" :key="index">
                 <img
                 class="img_100j"
-                  src="https://iph.href.lu/500x230?text=%E5%9B%BE%E7%89%87%E6%AF%94%E4%BE%8B%3D2.1%20%3A%201&fg=666666&bg=cccccc"
+                  :src="item"
                   alt="图片加载失败"
                 />
               </van-swipe-item>
@@ -106,12 +96,12 @@
     </div>
     
 
-    <div class="bg_box">
+    <div class="bg_box" :style="{background:`url(${data.sel_down_back}) 0 0 no-repeat`}">
         <div class="pd-box">
              <el-row :gutter="20" class="item-box">
-            <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in bg_arr" :key="index">
+            <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in data.sel_down_info" :key="index">
                 <div class="top">
-                    <img src="https://iph.href.lu/100x100?fg=666666&bg=cccccc" alt="">
+                    <img :src="item.path" alt="">
                 </div>
                 <div class="text1">
                     {{item.title}}
@@ -128,15 +118,14 @@
     <div class="hezuo-box hide_768 hide_425">
             <div class="left">
                 <div class="text1">
-                    诚邀实力合作伙伴
+                    {{data.recruit_con.title}}
                 </div>
-                <div class="text2">
-                    诚邀实力合作伙伴诚邀实力合作伙伴诚邀实力合作伙伴诚邀实力合作伙伴诚邀实力合作伙伴诚邀实力合作伙伴
+                <div class="text2" v-html="data.recruit_con.content">
                 </div>
             </div>
             <div class="right">
                 <div class="butn">
-                    招募合作
+                    {{data.recruit_con.btn}}
                 </div>
             </div>
         </div>
@@ -153,34 +142,38 @@
             </div>
           </div>
           <img src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/financing_lable.png" class="new-lable-img" alt="">
-          <div class="news-desc">驿公里智能获得多家国内外一线投资机构的青睐，累计融资金额达数十亿元</div>
+          <div class="news-desc">发发发发发发</div>
           <div class="read-news-button">
             点击阅读
           </div>
         </div>
         <div class="icon-box">
-                    <span class="iconfont icon-arrow-left"></span>
-                    <span class="m-l-5 m-r-5">1/2</span>
+                    <span class="iconfont icon-arrow-left" @click="swiper_prev()"></span>
+                    <span class="m-l-5 m-r-5">{{news_index}}/{{news_arr.length}}</span>
                     
-                    <span class="iconfont icon-youjiantou"></span>
+                    <span class="iconfont icon-youjiantou" @click="swiper_next()"></span>
         </div>
-        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android hide_425">
+        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android hidden-xs-only">
             <van-swipe
               class="vant_swipe3"
               indicator-color="white"
               :touchable="true"
+              ref="news1"
+              @change="news_swiper_change"
             > 
-              <van-swipe-item v-for="(item,index) in 2 " :key="index">
+              <van-swipe-item v-for="(item,index) in news_arr " :key="index">
                   <div class="news-img-box">
-                      <div class="item" v-for="(items,i) in 3" :key="i">
+                      <div class="item" v-for="(items,i) in item" :key="i"
+                      @click="goDetail(items)"
+                      >
                           <div class="img-box">
-                              <img src="../assets/shihua.jpg" alt="">
+                              <img :src="items.big_img" alt="">
                           </div>
                           <div class="text-box">
-                              儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
+                              {{items.center_text}}
                           </div>
                           <div class="bottom_img-box">
-                            <img class="bottom_img" src="../assets/baidu.png" alt="">
+                            <img class="bottom_img" :src="items.mini_img" alt="">
                           </div>
                           
                       </div>
@@ -188,23 +181,24 @@
               </van-swipe-item>
             </van-swipe>
         </div>
-          <div class="news-list-wrapper2  swiper-container-horizontal swiper-container-android show_425">
+          <div class="news-list-wrapper2  swiper-container-horizontal swiper-container-android hidden-sm-and-up">
             <van-swipe
               class="vant_swipe3 vant_swipe_425"
               indicator-color="white"
               :touchable="true"
+              ref="news2"
             >
-              <van-swipe-item v-for="(item,index) in 2 " :key="index">
+              <van-swipe-item v-for="(item,index) in data.new_info " :key="index">
                   <div class="news-img-box2">
-                      <div class="item" v-for="(items,i) in 3" :key="i">
+                      <div class="item" v-for="(items,i) in item.con_img" :key="i">
                           <div class="img-box">
-                              <img src="../assets/shihua.jpg" alt="">
+                              <img :src="items.above_img" alt="">
                           </div>
                           <div class="text-box">
-                              儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a儿时的配方123a
+                              {{items.center_text}}
                           </div>
                           <div class="bottom_img-box">
-                            <img class="bottom_img" src="../assets/baidu.png" alt="">
+                            <img class="bottom_img" :src="items.down_img" alt="">
                           </div>
                           
                       </div>
@@ -215,15 +209,15 @@
       </div>
     </div>
     <div class="green_bg">
-      <div class="container green_bg">
-      <div class="huoban_box green_bg">
+      <div class="container">
+      <div class="huoban_box">
        <div class="title">
          我们的合作伙伴
        </div>
 
        <div class="huoban_img">
-         <div v-for="(item,index) in 15" :key="index">
-            <img    src="https://iph.href.lu/100x100?text=1%3A1&fg=666666&bg=cccccc" alt="">
+         <div v-for="(item,index) in data.coo_par" :key="index">
+            <img    :src="item.path" alt="">
          </div>
          
        </div>
@@ -241,8 +235,8 @@
       </div>
       <div class="scroll_box" ref="personWrap" @touchstart="clearTime()" @touchend="startTime()">
         <div class="item-box" ref="personTab">
-          <div class="item" v-for="(item,index) in 20" :key="index">
-              <img src="../assets/banner.jpg" alt="">
+          <div class="item" v-for="(item,index) in data.par_sup" :key="index">
+              <img :src="item.path" alt="">
           </div>
         </div>
       </div>
@@ -252,13 +246,13 @@
    
     
 
-    <div class="blue-bg">
+    <div class="blue-bg hidden-sm-and-down">
       <div class="left">
-        fafafafafafafa
+        {{data.join_us.content}}
       </div>
       <div class="right">
         <div class="butn">
-          join us now
+          {{data.join_us.btn}}
         </div>
       </div>
     </div>
@@ -276,6 +270,20 @@ export default {
   },
   data() {
     return {
+      news_index:1,
+      bottom_width:0,
+      data:{
+        banner:[],
+        banner_down:[],
+        coo_par:[],
+        join_us:[],
+        new_info:[],
+        par_sup:[],
+        recruit_con:{},
+        sel:{},
+        sel_down_back:'',
+        sel_down_info:[]
+      },
       times:null,
       times2:null,
        swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
@@ -328,14 +336,74 @@ export default {
           content: "好吉色介绍好吉色介绍好几色介绍",
         },
       ],
+      news_arr:[]
     };
   },
   created() {
+   
+  },
+  mounted() {
+       this.getdata()
     this.$nextTick(() => {
-      this.personScroll(20,240);
+     
+      
     });
   },
   methods: {
+    setweb(){
+       let {data}=this
+      let keyword=document.createElement('meta')
+    let miaoshu=document.createElement('meta')
+    let head=document.getElementsByTagName('head')[0]
+    console.log(head)
+    keyword.name='keyword'
+    keyword.content=data.seo.keyword
+    miaoshu.name='description'
+    miaoshu.content=data.seo.describe
+    head.append(keyword)
+    head.append(miaoshu)
+    document.title=data.seo.title
+    },
+    goDetail(item){
+      let json=JSON.stringify(item)
+      console.log(item)
+      this.$router.push('/news_detail?data='+json)
+    },
+    swiper_prev(){
+      let news=this.$refs.news1
+      news.prev()
+    },
+    swiper_next(){
+      let news=this.$refs.news1
+      news.next()
+    },  
+    news_swiper_change(e){
+      this.news_index=e+1
+    },
+    splice_arr(arr){
+      if(arr.length<3){
+        this.news_arr.push(arr)
+        console.log(this.news_arr)
+        return 
+      }
+      this.news_arr.push(arr.splice(0,3))
+
+      if(arr.length){
+        this.splice_arr(arr)
+      }
+      
+    },
+    getdata(){
+      this.ajax({
+        url:'index/index/index'
+      }).then(res=>{
+        this.data=res.data
+        
+        this.personScroll(this.data.par_sup.length,240);
+        this.splice_arr(this.data.new_info)
+        this.setweb()
+      })
+    },
     clearTime(){
       clearInterval(this.times)
       clearTimeout(this.times2)
@@ -348,6 +416,8 @@ export default {
     personScroll(num,widths) {
       // 默认有六个li子元素，每个子元素的宽度为120px
       let width = num * widths;
+      this.bottom_width=num*widths
+      console.log(num,widths)
       this.$refs.personTab.style.width = width + "px";
       // this.$nextTick 是一个异步函数，为了确保 DOM 已经渲染
       this.$nextTick(() => {
@@ -365,12 +435,16 @@ export default {
           this.scroll.refresh();
         }
       });
-      this.scrollmove()
+      this.scrollmove(width)
       
     },
     scrollmove(){
       let s=0
        this.times=setInterval(() => {
+         if(-s>=this.bottom_width-outerWidth+200){
+
+           s=0
+         }
         s-=1
           this.scroll.scrollTo(s,0)
       }, 10);
@@ -382,10 +456,20 @@ export default {
 
 <style scoped lang="scss">
 .green_bg{
-  background: rgb(50,188,173) !important;
+  background:white !important;
+  .container{
+    background: white !important;
+    max-width: 1200px !important;
+  }
+}
+.bg_white2{
+  background: white;
 }
 .bg_white{
-  background: white;
+  background:white;
+  .container{
+    background: white !important;
+  }
 }
 .img_100{
   .img_100j{
@@ -419,7 +503,7 @@ export default {
   padding: 10px 0;
 }
 .blue-bg{
-  background: rgb(5,190,254);
+  background:  rgb(50,188,173);
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
@@ -461,8 +545,9 @@ export default {
         width: 240px;
         margin: 0 10px;
         display: flex;
+        align-items: center;
+        justify-content: center;
         img{
-          margin: auto;
           // width: 100%;
           // height: 100%;
         }
@@ -471,7 +556,6 @@ export default {
   }
 }
 .huoban_box{
-  background: white;
   box-sizing: border-box;
   .title{
     text-align: center;
@@ -484,15 +568,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     div{
-      margin: 10px 2%;
-      width: 16%;
+      margin: 10px 3%;
+      width: 10%;
       display: flex;
       // height: 100px;
+      align-items: center;
+      justify-content: center;
     }
      img{
+       width: 100%;
       border-radius: 50%;
-       margin:auto;
-      max-width: 100%;
+      max-width: 80px;
       max-height: 100%;
      }
   }
@@ -548,9 +634,9 @@ export default {
               display: flex;
             }
             .item{
-              flex: 1 0 auto;
                 background: white;
-                width: 240px;
+                // width: 240px;
+                width: 33%;
                 margin: 0 10px;
                 height: 100%;
                 box-shadow: 2px 6px 10px rgba(0, 0, 0, 0.4);
@@ -669,7 +755,6 @@ export default {
     }
 }
 .bg_box{
-    background: url('https://iph.href.lu/1920x275?text=2.8%3A1&fg=666666&bg=cccccc') 0 0 no-repeat;
     background-size: cover;
     height: 300px;
     color: white;

@@ -1,22 +1,21 @@
 <template>
     <div class="content">
-        <topNav black="true" />
 
         <el-row :gutter="20">
-             <el-col class="text-box" :xs="24" :sm="17">
+             <el-col class="text-box" :xs="24" :sm="24">
             <div class="title">
-                驿公里无人智能洗车高效实惠 备受青睐
+                {{data.inside_text||data.title}}
             </div>
             <div class="time-box">
-                <span class="text1 m-r-20">
+                <!-- <span class="text1 m-r-20">
                     媒体报道：天极网
-                </span>
+                </span> -->
                 <span class="text2">
-                    时间：2020-09-30
+                    时间：{{data.time||data.report_time}}
                 </span>
             </div>
         </el-col>
-        <el-col class="yuedu_box hidden-sm-and-down" :sm="7">
+        <!-- <el-col class="yuedu_box hidden-sm-and-down" :sm="7">
             <div class="title">
                 相关阅读
             </div>
@@ -28,13 +27,13 @@
                     驿公里智能洗车 主打无人化黑科技
                 </div>
             </div>
-        </el-col>
+        </el-col> -->
         </el-row>
 
         
 
-        <div class="news_detail">
-            富文本富文本富文本
+        <div class="news_detail" v-html="data.content">
+            
         </div>
     </div>
 </template>
@@ -44,7 +43,17 @@ import topNav from "@/components/top_nav";
 export default {
     components:{
         topNav
-    }
+    },
+    data(){
+        return{
+            data:JSON.parse(localStorage.getItem('news'))
+        }
+    },
+    created() {
+        console.log(this.$route.query.data)
+        // console.log(JSON.parse(this.$route.query.data))
+        console.log(this.data)
+    },
 }
 </script>
 

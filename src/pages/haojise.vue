@@ -1,23 +1,10 @@
 <template>
     <div class="content">
-        <div class="banner_box">
-            <top-nav />
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in swiper_arr" :key="index" ref="test">
-          <img
-            :src="item"
-            alt=""
-            @load="img_load"
-          />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-
-    <div class="top_fiex fiex2 hidden-sm-and-down" ref="top_fiex" v-show="top_flex">
+    <div class="top_fiex fiex2 hidden-sm-and-dowm" ref="top_fiex" v-show="top_flex">
              <ul class="container">
-             <li v-for="(item,index) in top_arr" :key="index" :class="{'top_choise':top_index==index}" @click="top_index=index">
+             <li v-for="(item,index) in data" :key="index" :class="{'top_choise':top_index==index}" @click="top_index=index">
                  <span>
-                     {{item}}
+                     {{item.title}}
                  </span>
              </li>
          </ul>
@@ -26,9 +13,9 @@
      
      <div class="top_fiex hidden-sm-and-down" ref="top_height">
              <ul class="container">
-             <li v-for="(item,index) in top_arr" :key="index" :class="{'top_choise':top_index==index}" @click="top_index=index">
+             <li v-for="(item,index) in data" :key="index" :class="{'top_choise':top_index==index}" @click="top_index=index">
                  <span>
-                     {{item}}
+                     {{item.title}}
                  </span>
              </li>
          </ul>
@@ -38,21 +25,21 @@
      <div class="tedian1-box" ref="tedian1">
          <div class="text-box">
              <div class="title-text">
-            特点一
+            {{data[1]&&data[1].title}}
          </div>
          <div class="title-text2">
-             专门为无人化场景而设计的全新硬件，由麻省理工团队研发，获得多项专利认证
+             {{data[1]&&data[1].content}}
          </div>
          </div>
          
          <div class="img-box">
-             <img src="https://iph.href.lu/879x300?text=随意大小&fg=666666&bg=cccccc" alt="">
+             <img :src="data[1]&&data[1].path" alt="">
          </div>
          <el-row class="xiala-box" >
-             <el-col class="pd-box" v-for="(item,index) in xiala_arr" :key="index" :xs="24" :sm="8">
+             <el-col class="pd-box" v-for="(item,index) in data[1]&&data[1].pri_cov" :key="index" :xs="24" :sm="8">
                   <div class="item">
                  <div class="title">
-                     {{item.name}}
+                     {{item.title}}
 
                  <span  :class="[item.xiala?'icon-xiala-copy':'icon-xiala']" class="iconfont icon-xiala f-r"></span>
                  <!-- <span v-else class="iconfont icon-xiala-copy"></span> -->
@@ -67,13 +54,13 @@
          </el-row>
      </div>
 
-     <div class="tedian1-bg" ref="tedian2">
+     <div class="tedian1-bg" ref="tedian2" :style="`background:url(${data[2]&&data[2].pri_cov.img}) 0 0 no-repeat`">
           <div class="text-box">
                  <div class="text1">
-                     特点二
+                     {{data[2]&&data[2].title}}
                  </div>
                  <div class="text2">
-                     多项独具创新的设计，激光雷达、超声波检测、光电定位，为用户提供更好的引导和洗车体验
+                     {{data[2]&&data[2].content}}
                  </div>
              </div>
      </div>
@@ -82,40 +69,39 @@
             <div class="gray-box hide_725">
                 <div class="left" >
                     <div class="text1">
-                        EMO人机交互系统
+                        {{data[2]&&data[2].pri_cov.title}}
                     </div>
                     <div class="text2">
-                        基于强大的侦测系统和云计算平台，集成语音交互场景带入，给您更好的帮助。
+                        {{data[2]&&data[2].pri_cov.content}}
                     </div>
                 </div>
                 <div class="right">
-                    <img src="https://iph.href.lu/600x310?text=1.9%3A1&fg=666666&bg=cccccc" alt="">
+                       <img :src="data[2]&&data[2].pri_cov.img" alt="">
                 </div>
             </div>
             <div class="gray-box show_725">
                 <div class="left" >
                     <div class="text1">
-                        EMO人机交互系统
+                        {{data[2]&&data[2].pri_cov.title}}
                     </div>
                     <div class="text2">
-                        基于强大的侦测系统和云计算平台，集成语音交互场景带入，给您更好的帮助。
+                        {{data[2]&&data[2].pri_cov.content}}
                     </div>
                 </div>
                 <div class="right">
-                    <img src="https://iph.href.lu/600x310?text=1.9%3A1&fg=666666&bg=cccccc" alt="">
+                    <img :src="data[2]&&data[2].pri_cov.img" alt="">
                 </div>
             </div>
          </div>
      </div>
 
-     <div class="xikong_box" ref="tedian3">
+     <div class="xikong_box" ref="tedian3" :style="`background:url(${data[3]&&data[3].path}) 0 0 no-repeat`">
          <div class="text-box">
              <div class="text1">
-                 特点三
+                 {{data[3]&&data[3].title}}
              </div>
              <div class="text2">
-                 洗控系统专利技术，借助大量车型的洗车数据，创建完善清洗模
-                 块，同一车型、同一辆车，洗的次数越多越干净
+                 {{data[3]&&data[3].content}}
              </div>
          </div>
      </div>
@@ -125,18 +111,18 @@
      </div> -->
      <div class="white">
          <el-row class="list-box" :gutter="20">
-         <el-col  v-for="(item,index) in 4" :key="index" :sm="6" :xs="24">
+         <el-col  v-for="(item,index) in data[3]&&data[3].pri_cov" :key="index" :sm="6" :xs="24">
              <div class="item">
                  <div class="text-box">
                  <div class="text1">
-                     车机互联
+                     {{item.title}}
                  </div>
                  <div class="text2">
-                     车辆进入地图范围，智能提醒洗车需求
+                     {{item.content}}
                  </div>
              </div>
              <div class="img-box">
-                 <img src="https://iph.href.lu/826x415?text=2%3A1&fg=666666&bg=cccccc" alt="">
+                 <img :src="item.img" alt="">
              </div>
              </div>
              
@@ -146,15 +132,15 @@
       <div class="tedian1-box" ref="tedian4">
          <div class="text-box">
              <div class="title-text">
-            特点四
+            {{data[4]&&data[4].title}}
          </div>
          <div class="title-text2">
-             专门为无人化场景而设计的全新硬件，由麻省理工团队研发，获得多项专利认证
+             {{data[4]&&data[4].content}}
          </div>
          </div>
          
          <div class="img-box">
-             <img src="https://iph.href.lu/800x400?text=随意大小&fg=666666&bg=cccccc" alt="">
+             <img :src="data[4]&&data[4].path" alt="">
 
          </div>
          
@@ -165,8 +151,10 @@
 <script>
 import topNav from "@/components/top_nav";
 export default {
+    props:['mimg_load'],
     data(){
         return{
+            data:[],
             add:false,
              swiper_arr:[require('../assets/swiper.jpg'),require('../assets/swiper.jpg')],
             top_arr:['特点一','特点二','特点三','特点四'],
@@ -210,23 +198,37 @@ export default {
         topNav
     },
     created() {
-
+        this.getdata()
+        
     },
     mounted() {
-         let height=this.$refs.top_fiex.offsetTop
-         console.log(height)
-        let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
-        if(scrollTop>=height-60){
-                    //    this.top_flex=true
-        }
+        //  let height=this.$refs.top_height.offsetTop
+        //  console.log(height)
+        // let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
+        // if(scrollTop>=height-60){
+        //             //    this.top_flex=true
+        // }
     },
     methods: {
+        getdata(){
+            this.ajax({
+                url:'index/index/peculiarity'
+            }).then(res=>{
+                this.data=res.list
+                console.log(this.data)
+                this.img_load()
+                this.data[1].pri_cov.forEach(item=>{
+                    this.$set(item,'xiala',false)
+                })
+            })
+        },
          img_load(){
         if(this.add){
           return
         }
         this.add=true
            let timel=null
+           console.log()
          let height=this.$refs.top_height.offsetTop
                  console.log(height)
            window.addEventListener('scroll',(e)=>{
@@ -242,13 +244,16 @@ export default {
     },
     watch: {
         top_index(news,old){
+            console.log(news)
+            console.log(this.$refs['tedian1'])
+
             window.scrollTo({ 
-                top: this.$refs['tedian'+(news+1)].offsetTop-100, 
+                top: this.$refs['tedian'+(news)].offsetTop-100, 
                 behavior: "smooth" 
             });
             // document.documentElement.scroll(0,this.$refs['tedian'+(news+1)].offsetTop,true)
             // document.documentElement.scrollTo(0,this.$refs['tedian'+(news+1)].offsetTop,true)
-            console.log(this.$refs['tedian'+(news+1)].offsetTop)
+            console.log(this.$refs['tedian'+(news)].offsetTop)
         }
     },
 }
@@ -312,7 +317,6 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     }
 }
 .xikong_box{
-    background: url('https://iph.href.lu/800x400?text=1.6%3A1&fg=666666&bg=cccccc');
     background-position: 50% 0;
     background-size: auto 100%;
     height: 680px;
@@ -348,6 +352,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
                 height: 100%;
                 flex: 0 1 auto;
                 // min-width: 70px;
+                width: 40%;
                 box-sizing: border-box;
                 padding: 142px 0 0 40px;
 
@@ -360,9 +365,10 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
             }
             }
             .right{
+                width: 60%;
                 display: flex;
                 flex: 0 1 auto;
-                // min-width: 500px;
+                max-width: 500px;
                 box-sizing: border-box;
                 padding: 10px;
                 img{
@@ -379,12 +385,13 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
                 width: 100% !important;
                 margin: 0 0 15px 0;
             }
-            
+            .right{
+                width: 100% !important;
+            }
         }
     }
 }
 .tedian1-bg{
-    background: url('https://iph.href.lu/800x400?text=2.7%3A1&fg=666666&bg=cccccc') 0 0 no-repeat;
     height: 680px;
     margin: 70px 0 0 0;
     background-size: auto 100%;
@@ -418,11 +425,13 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
         }
     }
     .img-box{
-        height: 225px;
         width: 100%;
         display: flex;
+        align-items: center;
+        justify-content: center;
         img{
-            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
         }
     }
     .xiala-box{

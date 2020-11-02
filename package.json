@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "echarts": "^4.9.0",
     "element-ui": "^2.13.2",
+    "scrollreveal": "^4.0.7",
     "vant": "^2.10.11",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",

@@ -56,6 +56,9 @@
             </el-col>
         
        </el-row>
+       <div class="bottom_texts">
+           Copyright&nbsp;©&nbsp;浙江好吉色食品有限公司&nbsp;&nbsp;浙ICP备20016825号&nbsp;&nbsp;技术支持:广州易合网信息技术有限公司
+       </div>
     </div>
 </div>
    
@@ -84,6 +87,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.bottom_texts{
+    text-align: center;
+    font-size: 12px;
+    color: rgb(168,169,169);
+}
 @media screen and (max-width:426px) {
     .bottom_box{
         text-align: center !important;
@@ -134,7 +142,7 @@ img{
            ul{
                li{
                    list-style-type: disc;
-                   color: #999;
+                   color:  rgb(168,169,169);
                    margin: 5px 0;
                    font-size: 12px;
                }
@@ -155,7 +163,7 @@ img{
                    .right_text{
                        line-height: 25px;
                        font-size: 12px;
-                       color: #999;
+                       color:  rgb(168,169,169);
                    }
                }
            }
@@ -174,7 +182,7 @@ img{
            }
            .right_text{
                flex: 1;
-               color: #999;
+               color:  rgb(168,169,169);
                font-size: 12px;
            }
        }

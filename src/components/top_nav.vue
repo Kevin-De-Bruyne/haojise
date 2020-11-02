@@ -1,5 +1,5 @@
 <template>
-<div class="banner_box">
+<div class="banner_box wow slideInUp">
     <div class="butn top_butn" v-if="$route.path=='/hezuo'" @click="gobottom()">
             采购咨询
         </div>
@@ -160,9 +160,9 @@ export default {
                    }
                     //  console.log(e)
 					let opacity = scrollTop * 0.65 / bannerHeight;
-					// if(opacity>0.5){
-                    //     opacity=0.5
-                    // }
+					if(opacity>0.5){
+                        opacity=0.5
+                    }
                     let z='rgba(0,0,0, ' + opacity+')'
                      nav.style.background = z;
 				},true)
@@ -323,8 +323,10 @@ export default {
             width: 700px;
             justify-content: space-between;
             height: 100%;
+            align-items: center;
             .item{
-                line-height: 58px;
+                height: 30px;
+                // line-height: 58px;
                 cursor: pointer;
             }
         }

@@ -51,7 +51,6 @@
 import topNav from '@/components/top_nav'
 import footers from '@/components/bottom'
 import right_nav from '@/components/right_nav'
-import {WOW} from 'wowjs' 
 export default {
     components:{
         topNav,
@@ -70,8 +69,12 @@ export default {
     },
     created() {
         this.getdata()
+        
     },
     methods: {
+      initan(){
+     
+      },
       img_load(){
         console.log('jfiajifajiofjaoifjoaaa')
         this.img_=true
@@ -118,10 +121,7 @@ export default {
     },
     mounted() {
       this.$nextTick(()=>{
-         var wow = new WOW({
-            live: false
-          })
-          wow.init()
+        this.initan()
       })
     },
 }

@@ -68,6 +68,13 @@ export default {
         .item{
            background: white;
             margin: 0 0 3% 0;
+            height: 230px;
+            .top_img{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 148px;
+            }
         }
         .text{
             box-sizing: border-box;

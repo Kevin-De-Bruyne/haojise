@@ -39,8 +39,7 @@
              <el-col class="pd-box" v-for="(item,index) in data[1]&&data[1].pri_cov" :key="index" :xs="24" :sm="8">
                   <div class="item">
                  <div class="title">
-                     {{item.title}}
-
+                     <span class="text">{{item.title}}</span>
                  <span  :class="[item.xiala?'icon-xiala-copy':'icon-xiala']" class="iconfont icon-xiala f-r"></span>
                  <!-- <span v-else class="iconfont icon-xiala-copy"></span> -->
                  </div>
@@ -54,7 +53,7 @@
          </el-row>
      </div>
 
-     <div class="tedian1-bg" ref="tedian2" :style="`background:url(${data[2]&&data[2].pri_cov.img}) 0 0 no-repeat`">
+     <div class="tedian1-bg" ref="tedian2" :style="`backgroundImage:url(${data[2]&&data[2].pri_cov.img})`">
           <div class="text-box">
                  <div class="text1">
                      {{data[2]&&data[2].title}}
@@ -95,7 +94,7 @@
          </div>
      </div>
 
-     <div class="xikong_box" ref="tedian3" :style="`background:url(${data[3]&&data[3].path}) 0 0 no-repeat`">
+     <div class="xikong_box" ref="tedian3" :style="`backgroundImage:url(${data[3]&&data[3].path})`">
          <div class="text-box">
              <div class="text1">
                  {{data[3]&&data[3].title}}
@@ -202,6 +201,7 @@ export default {
         
     },
     mounted() {
+        this.initan()
         //  let height=this.$refs.top_height.offsetTop
         //  console.log(height)
         // let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
@@ -210,6 +210,15 @@ export default {
         // }
     },
     methods: {
+        
+        initan(){
+
+this.createAn('.left_an','left')
+this.createAn('.right_an','right')
+this.createAn('.top_an','top')
+this.createAn('.bottom_an','bottom')
+this.createAn('.rota','rota')
+        },
         getdata(){
             this.ajax({
                 url:'index/index/peculiarity'
@@ -322,6 +331,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     height: 680px;
     box-sizing: border-box;
     padding: 6% 4% 0 4%;
+    background-repeat: no-repeat;
     text-align: center;
     .text-box{
         color: white;
@@ -411,10 +421,12 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 }
 .tedian1-box{
     background: rgb(247,247,247);
+    padding: 20px 0 ;
     .text-box{
-        padding: 5% 0 3% 0;
+        padding: 5% 20px 3% 20px;
         text-align: center;
         color: #000;
+        box-sizing: border-box;
         .title-text{
             font-size: 28px;
 
@@ -437,6 +449,13 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     .xiala-box{
         display: flex;
         flex-wrap: wrap;
+        .title{
+            display: flex;
+             
+.text{
+   flex: 1;
+}
+        }
         .show_box{
             margin: 20px 0 0 0;
             font-size: 14px;

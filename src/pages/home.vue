@@ -3,7 +3,7 @@
     
     <div class="bg_white2 p-b-20">
       <div class="container p-t-20">
-      <div class="text-box wow slideInUp">
+      <div class="text-box right_an">
         <div class="text1 ">熬夜加班，就喝好吉色</div>
         <div class="text2">
           熬夜加班，就喝好吉色 If you stay up late and work overtime, you'll
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <el-row class="icon_list" :gutter="20">
+      <el-row class="icon_list" data-wow-duration="2s" data-wow-delay="5s" :gutter="20">
         <el-col class="pd-box-10" v-for="(item,index) in data.banner_down" :key="index"
         :sm="6" :xs="12" 
         >
@@ -62,7 +62,7 @@
 
         <!-- 为什么选择好吉色 -->
       <div class="choise_box">
-          <div class="left">
+          <div class="left left_an">
               <div class="title">
                   {{data.sel.title}}
               </div>
@@ -70,11 +70,11 @@
                   
                   
               </div>
-              <div class="butn">
+              <div class="butn" @click="$router.push('/haojise')">
                   查看更多
               </div>
           </div>
-          <div class="right img_100">
+          <div class="right img_100 right_an">
                <van-swipe
               class="vant_swipe2"
               :autoplay="3000"
@@ -95,12 +95,11 @@
     </div>
     </div>
     
-
-    <div class="bg_box" :style="{background:`url(${data.sel_down_back}) 0 0 no-repeat`}">
+      <div class="bg_box " :style="{background:`url(${data.sel_down_back}) 0 0 no-repeat`}">
         <div class="pd-box">
              <el-row :gutter="20" class="item-box">
-            <el-col :sm="6" :xs="12" class="item" v-for="(item,index) in data.sel_down_info" :key="index">
-                <div class="top">
+            <el-col :sm="6" :xs="12" class="item " v-for="(item,index) in data.sel_down_info" :key="index">
+                <div class="top top_an">
                     <img :src="item.path" alt="">
                 </div>
                 <div class="text1">
@@ -112,10 +111,12 @@
             </el-col>
         </el-row>
         </div>
+
+    
        
         
     </div>
-    <div class="hezuo-box hide_768 hide_425">
+    <div class="hezuo-box hide_768 hide_425 right_an">
             <div class="left">
                 <div class="text1">
                     {{data.recruit_con.title}}
@@ -143,7 +144,7 @@
           </div>
           <img src="https://source.1kmxc.com/static-web-new/website/images3.0/X-home/financing_lable.png" class="new-lable-img" alt="">
           <div class="news-desc">发发发发发发</div>
-          <div class="read-news-button">
+          <div class="read-news-button" @click="$router.push('/news_list')">
             点击阅读
           </div>
         </div>
@@ -153,7 +154,9 @@
                     
                     <span class="iconfont icon-youjiantou" @click="swiper_next()"></span>
         </div>
-        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android hidden-xs-only">
+        <div class="news-list-wrapper swiper-container swiper-container-horizontal swiper-container-android hidden-xs-only
+        right_an
+        ">
             <van-swipe
               class="vant_swipe3"
               indicator-color="white"
@@ -208,7 +211,7 @@
         </div>
       </div>
     </div>
-    <div class="green_bg">
+    <div class="green_bg ">
       <div class="container">
       <div class="huoban_box">
        <div class="title">
@@ -251,7 +254,7 @@
         {{data.join_us.content}}
       </div>
       <div class="right">
-        <div class="butn">
+        <div class="butn" @click="gofrom()">
           {{data.join_us.btn}}
         </div>
       </div>
@@ -263,7 +266,7 @@
 <script>
 import topNav from "@/components/top_nav";
 import Bscroll from 'better-scroll'
-
+import { WOW} from 'wowjs'
 export default {
   components: {
     topNav,
@@ -343,13 +346,21 @@ export default {
    
   },
   mounted() {
+       this.initwow()
        this.getdata()
-    this.$nextTick(() => {
-     
-      
-    });
+
   },
   methods: {
+    gofrom(){
+      this.$router.push('/hezuo?scroll=true')
+    },
+    initdonghua(){
+      
+this.createAn('.left_an','left')
+this.createAn('.right_an','right')
+this.createAn('.top_an','top')
+this.createAn('.bottom_an','bottom')
+    },
     setweb(){
        let {data}=this
       let keyword=document.createElement('meta')
@@ -393,15 +404,27 @@ export default {
       }
       
     },
+    initwow(){
+      var wow = new WOW({
+   boxClass: 'wow',
+    animateClass: 'animated',
+    offset: 0,
+    mobile: false,
+    live: false
+    })
+      wow.init()
+    },
     getdata(){
       this.ajax({
         url:'index/index/index'
       }).then(res=>{
         this.data=res.data
-        
+        this.initdonghua()
+       
         this.personScroll(this.data.par_sup.length,240);
         this.splice_arr(this.data.new_info)
         this.setweb()
+        
       })
     },
     clearTime(){
@@ -750,7 +773,8 @@ export default {
             text-align: center;
             width: 100px;
             border: 1px solid #eee;
-            color: #000;
+            background: #149ecb;
+            color: white;
         }
     }
 }

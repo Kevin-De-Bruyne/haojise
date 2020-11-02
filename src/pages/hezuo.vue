@@ -39,6 +39,7 @@
           <el-col
             :sm="8"
             :xs="8"
+            class="m-t-10 items"
             v-for="(item, index) in data.our_strengths.path"
             :key="index"
           >
@@ -147,7 +148,8 @@
             <div class="text">
               籍贯
             </div>
-            <el-select v-model="user.jiguan_data" placeholder="请选择">
+            <input type="text" placeholder="请输入籍贯" name="" id="">
+            <!-- <el-select v-model="user.jiguan_data" placeholder="请选择">
               <el-option
                 v-for="(item,index) in jiguan_arr"
                 :key="index"
@@ -155,7 +157,7 @@
                 :value="item.value"
               >
               </el-option>
-            </el-select>
+            </el-select> -->
           </el-col>
 
           <el-col :sm="8" :xs="12">
@@ -187,7 +189,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col>
-            <textarea name="" class="beizhu" placeholder="详细描述您的情况，及合作意向，我们会尽快给您回复" v-model="user.content" id="" cols="30" rows="10"></textarea>
+            <textarea name="" class="beizhu" placeholder="详细描述您的情况，及合作意向，我们会尽快给您回复(最多输入100字)" maxlength="100" v-model="user.content" id="" cols="30" rows="10"></textarea>
           </el-col>
         </el-row>
 
@@ -207,12 +209,6 @@ import '../../node_modules/echarts/map/js/china.js'
 
 export default {
   data() {
-    
-BizQQWPA.addCustom({
-    aty: '0', //指定工号类型,0-自动分流，1-指定工号，2-指定分组
-    nameAccount: '1069617130', //指定的聊天 QQ 号码
-    selector: 'contactQQ' //触发聊天的标签id
-});
     return {
       user:{
         sex_radio:'1'
@@ -337,6 +333,9 @@ describe:user.content
                  selectedMode: 'single',
                  series : [                         
                             {
+                              markPoint:{
+                                symbol:'triangle'
+                              },
                               zoom:1.2,
                               name: '', 
                               type: 'map',
@@ -368,10 +367,12 @@ describe:user.content
     }
     },
     gobottom(){
-       window.scrollTo({ 
-                top: this.$refs.form_height.offsetTop-100, 
-                behavior: "smooth" 
-      });
+      console.log('gobottom')
+      window.location.hash='#caigou'
+      //  window.scrollTo({ 
+      //           top: this.$refs.form_height.offsetTop+1800, 
+      //           behavior: "smooth" 
+      // });
     }
   },
   components: {
@@ -390,6 +391,7 @@ describe:user.content
   box-sizing: border-box;
   padding: 6% 4% 4% 4%;
   background: white;
+
   .beizhu{
     height: 100px;
     width: 100%;
@@ -432,7 +434,9 @@ describe:user.content
     box-sizing: border-box;
     padding: 4%;
     border-radius: 20px;
-    margin: 60px 0 0 0;
+    margin: 60px auto 0 auto;
+      max-width: 1000px;
+      
     .text{
       font-size: 16px;
       margin: 0 0 10px 0;
@@ -510,10 +514,16 @@ describe:user.content
         flex: 1;
         .text1 {
           font-size: 18px;
+           overflow:hidden; 
+text-overflow:ellipsis;
+display:-webkit-box; 
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2; 
         }
         .text2 {
           display: flex;
           justify-content: space-between;
+              
           .left {
             color: #999;
             font-size: 16px;
@@ -526,6 +536,13 @@ describe:user.content
       }
     }
   }
+}
+@media screen and (max-width:450px){
+    .jiejue-box{
+      .items{
+        width: 100% !important;
+      }
+    }
 }
 .jiejue-box {
   background: rgb(252, 240, 221);

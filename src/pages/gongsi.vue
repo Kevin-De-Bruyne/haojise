@@ -334,22 +334,22 @@ export default {
       fn(){
         
           
-        let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
+        // let scrollTop = document.documentElement.scrollTop||document.body.scrollTop||window.pageYOffset
       
-        for(let i=0;i<this.height_arr.length;i++){
-                      // console.log(i)
-                      if(scrollTop>this.height_arr[i]+outerHeight/2&&scrollTop<this.height_arr[i+1]+outerHeight/2){
-                          this.top_index=i
-                          console.log(i)
-                      }else if(scrollTop>this.height_arr[i]+outerHeight/2&&!this.height_arr[i+1]){
-                          this.top_index=this.height_arr.length-1
-                      }
-              }
+        // for(let i=0;i<this.height_arr.length;i++){
+        //               // console.log(i)
+        //               if(scrollTop>this.height_arr[i]+outerHeight/2&&scrollTop<this.height_arr[i+1]+outerHeight/2){
+        //                   this.top_index=i
+        //                   console.log(i)
+        //               }else if(scrollTop>this.height_arr[i]+outerHeight/2&&!this.height_arr[i+1]){
+        //                   this.top_index=this.height_arr.length-1
+        //               }
+        //       }
                
                
       },
       change_index(index){
-        // this.top_index=index
+        this.top_index=index
         window.scrollTo({
            top:this.$refs['flex_'+(index+1)].offsetTop-(outerHeight/2),
             behavior: "smooth"
@@ -366,6 +366,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 375px){
+    .FAQ-box{
+  .texts{
+    font-size: 14px !important;
+  }
+}
+}
+
 .swiper_3d{
   .img-box{
     background-size: cover;
@@ -426,6 +434,7 @@ export default {
     .wenti-top{
       height: 58px;
       border-bottom: 1px solid #eee;
+      display: flex;
       background: rgb(255,255,255);
       .icon{
         background: #339ee5 url(http://images.netdragon.com/www/images/2014/spr_01.png) no-repeat 0 -75px;
@@ -435,7 +444,8 @@ export default {
         cursor: pointer;
       }
       .texts{
-        display: inline-block;
+        flex: 1;
+        overflow: hidden;
         margin: 0 0 0 2%;
         color: #339ee5;
         line-height: 58px;
@@ -490,10 +500,11 @@ export default {
     .item{
       // height: 415px;
       display: flex;
+      align-items: center;
+      justify-content: center;
       img{
         width: 100%;
         height: auto;
-        margin: auto;
       }
     }
   }
@@ -559,6 +570,11 @@ export default {
         flex: 1;
         .text1{
           font-size: 18px;
+           overflow:hidden; 
+text-overflow:ellipsis;
+display:-webkit-box; 
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2; 
         }
         .text2{
           display: flex;

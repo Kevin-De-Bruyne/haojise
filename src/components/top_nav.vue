@@ -190,11 +190,33 @@ export default {
     cursor: pointer;
 
   }
+  @media screen and (max-width: 600px){
+    .top_butn{
+        width: 140px !important;
+    }
+  }
+  @media screen and (max-width:500px){
+      .top_butn{
+          width: 100px !important;
+          height: 40px !important;
+          line-height: 40px !important;
+      }
+  }
+   @media screen and (max-width:400px){
+      .top_butn{
+          width: 70px !important;
+          height: 30px !important;
+          line-height: 30px !important;
+          font-size: 12px !important;
+          border-radius: 3px !important;
+      }
+  }
    .top_butn {
     cursor: pointer;
     position: absolute;
     bottom: 15%;
     left: 50%;
+    font-size: 14px;
     transform: translateX(-50%);
     width: 170px;
     height: 50px;

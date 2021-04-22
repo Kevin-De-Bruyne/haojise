@@ -1,7 +1,63 @@
 <template>
 <div class="bottom_box">
  <div class="container" v-if="data.down_word">
-        <el-row>
+        <el-row class="hide_378">
+
+        
+            <el-col :sm="6" class="hidden-sm-and-down" :xs="12">
+                <div class="img-box">
+                    <img :src="data.down_img" alt="">
+                </div>
+            </el-col>
+            <el-col :sm="6" :xs="8" class="bottom-box1 bottom-box">
+                <div class="title">
+                    {{data.down_word.title}}
+                </div>
+                <ul>
+                    <li v-for="(item,index) in data.down_word.content" :key="index">{{item}}</li>
+                </ul>
+            </el-col>
+            <el-col :sm="6" :xs="8" class="bottom-box2 bottom-box">
+                <div class="title">
+                    {{data.down_img_s.title}}
+                </div>
+                <div class="item-box">
+                    <div class="item" v-for="(item,index) in data.down_img_s.content" :key="index">
+                        <div class="left_img">
+                            <img :src="item.above_img" alt="">
+                        </div>
+                        <div class="right_text">
+                            <div class="text1">
+                                {{item.center_text}}
+                            </div>
+                            <!-- <div class="text2">
+                                好吉色
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </el-col>
+            <el-col :sm="6" :xs="8" class="bottom-box3 bottom-box">
+                <div class="title">
+                    {{data.down_img_word.title}}
+                </div>
+                <div class="item-box">
+                    <div class="item" v-for="(item,index) in data.down_img_word.content" :key="index">
+                        <div class="left_img">
+                            <img :src="item.above_img" alt="">
+                        </div>
+                        <div class="right_text">
+                            <div class="text1">
+                                {{item.center_text}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-col>
+        
+       </el-row>
+
+       <el-row class="show_378">
 
         
             <el-col :sm="6" class="hidden-sm-and-down" :xs="12">
@@ -16,6 +72,23 @@
                 <ul>
                     <li v-for="(item,index) in data.down_word.content" :key="index">{{item}}</li>
                 </ul>
+                  <div :sm="6" :xs="24" class="bottom-box3 bottom-box3_min bottom-box">
+                <div class="title">
+                    {{data.down_img_word.title}}
+                </div>
+                <div class="item-box">
+                    <div class="item" v-for="(item,index) in data.down_img_word.content" :key="index">
+                        <div class="left_img">
+                            <img :src="item.above_img" alt="">
+                        </div>
+                        <div class="right_text">
+                            <div class="text1">
+                                {{item.center_text}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </el-col>
             <el-col :sm="6" :xs="12" class="bottom-box2 bottom-box">
                 <div class="title">
@@ -37,23 +110,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-col :sm="6" :xs="24" class="bottom-box3 bottom-box">
-                <div class="title">
-                    好吉色好吉色
-                </div>
-                <div class="item-box">
-                    <div class="item" v-for="(item,index) in data.down_img_word.content" :key="index">
-                        <div class="left_img">
-                            <img :src="item.above_img" alt="">
-                        </div>
-                        <div class="right_text">
-                            <div class="text1">
-                                {{item.center_text}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </el-col>
+          
         
        </el-row>
        <div class="bottom_texts">
@@ -87,6 +144,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 378px){
+    
+    .hide_378{
+        display: none !important;
+    }
+}
+@media screen and (min-width: 379px){
+    .show_378{
+         display: none !important;
+    }
+}
 .bottom_texts{
     text-align: center;
     font-size: 12px;
@@ -95,22 +163,27 @@ export default {
 @media screen and (max-width:426px) {
     .bottom_box{
         text-align: center !important;
+        ul{
+            li{
+            list-style-type: none !important;
+            }
+        }
         img{
             display: block;
         }
     }
 }
 .container{
-    background: #000;
+    background: #676161;
        box-sizing: border-box;
-       padding: 60px 40px 20px 40px;
+       padding: 6% 4% 3% 4%;
 }
 img{
     width: 100%;
     height: 100%;
 }
    .bottom_box{
-       background:#000;
+       background:#676161;
     //    background: rgb(23,23,25);
       
        .left{
@@ -121,7 +194,6 @@ img{
        }
        .img-box{    
            height: 100%;
-           width: 200px;
            display: flex;
            padding: 0 50px;
            img{
@@ -129,13 +201,20 @@ img{
            }
        }
        .bottom-box{
-            padding: 0 20px;
            .title{
                color: white;
                font-size: 14px;
                margin: 0 0 30px 0;
            }
 
+       }
+       .bottom-box3_min{
+           .title{
+               margin: 30px 0 10px 0 !important;
+           }
+           .item{
+               justify-content: center;
+           }
        }
        .bottom-box1{
            
@@ -145,6 +224,13 @@ img{
                    color:  rgb(168,169,169);
                    margin: 5px 0;
                    font-size: 12px;
+               }
+               li::before{
+                   content: '';
+                   width: 5px;
+                   height: 5px;
+                   background: rgb(168,169,169);
+                //    border-radius: 50%;
                }
            }
        }
@@ -181,7 +267,6 @@ img{
                 width: 110px;
            }
            .right_text{
-               flex: 1;
                color:  rgb(168,169,169);
                font-size: 12px;
            }

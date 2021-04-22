@@ -3,7 +3,7 @@
       <topNav :data="data"  />
         <router-view :mimg_load="img_" />
         <footers />
-        <right :data="data.system" @cli="cli" />
+        <right :data="data.system" v-if="data.system" @cli="cli" />
              <el-dialog title="提交建议" :visible.sync="kefu_show">
   <el-form :model="form">
     <el-form-item label="标题" >
@@ -39,7 +39,7 @@
   :visible.sync="wx_show"
   width="30%"
   >
-  <img :src="data.system&&data.system.wechat" alt="">
+  <img class="wx_img" :src="data.system&&data.system.wechat" alt="">
   <span slot="footer" class="dialog-footer">
     <el-button type="primary" @click="wx_show = false">确 定</el-button>
   </span>
@@ -128,7 +128,10 @@ export default {
 </script>
 
 <style  lang="scss">
-
+.wx_img{
+  margin: auto;
+  display: block;
+}
 .container{
   max-width: 1200px;
   margin: 0 auto;

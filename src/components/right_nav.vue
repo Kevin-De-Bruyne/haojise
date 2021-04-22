@@ -3,10 +3,13 @@
 
         <div class="item-box">
             <div class="item" v-for="item in nav_arr" :key="item.name"
-            @click="item_cli(item)"
+            @click="item_cli(item)" @mouseover="mouseovers(item)" @mouseout="mouselive(item)"
             >
-            <div class="show_text">
-                在线咨询
+            <div class="erwei-box" v-if="item.name=='微信咨询'&&erwei_show">
+                <img :src="data.wechat" alt="">
+            </div>
+            <div class="show_text" >
+                {{item.text}}
             </div>
             <div class="top">
                 <img :src="item.img" alt="">
@@ -24,32 +27,39 @@
 </template>
 
 <script>
+let timer=null
 export default {
     props:['data'],
     data(){
         return{
+            erwei_show:false,
             form:{},
             shows:false,
             nav_arr:[
                 {
                 name:'在线客服',
-                img:require('../assets/kefu.png')
+                img:require('../assets/kefu.png'),
+                text:'在线客服'
             },
             {
                 name:'qq咨询',
-                img:require('../assets/qq.png')
+                img:require('../assets/qq.png'),
+                text:'qq在线咨询'
             },
             {
                 name:'电话沟通',
-                img:require('../assets/phone.png')
+                img:require('../assets/phone.png'),
+                text:this.data.mobile
             },
             {
                 name:'获取方案',
-                img:require('../assets/sousuo.png')
+                img:require('../assets/sousuo.png'),
+                text:'获取产品报价/方案'
             },
             {
                 name:'微信咨询',
-                img:require('../assets/wx.png')
+                img:require('../assets/wx.png'),
+                text:'微信扫一扫，添加客服微信'
             }
             ],
             kefu_show:false
@@ -66,7 +76,25 @@ export default {
                 }
 		},true)
     },
+    mounted() {
+
+    },
     methods: {
+        mouseovers(item){
+            if(item.name=='微信咨询'){
+                timer=setTimeout(() => {
+                    this.erwei_show=true
+                }, 800);
+            }
+        },
+        mouselive(item){
+            console.log(item.name)
+            if(item.name=='微信咨询'){
+                this.erwei_show=false
+                clearTimeout(timer)
+                
+            }
+        },
         item_cli(item){
             this.$emit('cli',item.name)
             
@@ -76,6 +104,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.erwei-box{
+    position: absolute;
+    left: -100%;
+    bottom: 0;
+    width: 150px;
+    height: 150px;
+    // padding: 20px;
+}
 @media screen and (max-width:500px){
     .item-box{
         .item{
@@ -101,16 +137,24 @@ export default {
        .item-box{
            position: relative;
            .item:hover .show_text{
-               width: 100%;
-               display: block !important;
+               width: 100% !important;
+               height: 100% !important;
+               opacity: 1 !important;
+               visibility: visible !important;
+            //    display: block !important;
            }
            .show_text{
-               line-height: 80px;
-               height: 100%;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               height: 0;
+               width: 0;
+               overflow: hidden;
                text-align: center;
                position: relative;
                z-index: 1;
-               display: none;
+               opacity: 0;
+               visibility: hidden;
            }
            .item:hover::before{
                width: 100% !important;
@@ -118,6 +162,14 @@ export default {
            .item:hover{
                width: 156px !important;
                background-color: transparent !important;
+           }
+           .item:hover .top{
+               opacity: 0 !important;
+               display: none !important;
+           }
+           .item:hover .bottom{
+               display: none !important;
+               opacity: 0 !important;
            }
            .item:nth-child(1){
                top: 0;
@@ -133,6 +185,7 @@ export default {
            }
            .item:nth-child(5){
                top: 360px;
+               position: relative;
            }
            .item::before{
                content: "";

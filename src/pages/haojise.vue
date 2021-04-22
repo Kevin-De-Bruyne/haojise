@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-    <div class="top_fiex fiex2 hidden-sm-and-dowm" ref="top_fiex" v-show="top_flex">
+    <div class="top_fiex fiex2 hidden-sm-and-down" ref="top_fiex" v-show="top_flex">
              <ul class="container">
              <li v-for="(item,index) in data" :key="index" :class="{'top_choise':top_index==index}" @click="top_index=index">
                  <span>
@@ -433,7 +433,10 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
         }
         .title-text2{
             margin: 3% 0 0 0;
-            font-size: 12px;
+            font-size: 16px;
+            max-width: 700px;
+            
+            margin: auto;
         }
     }
     .img-box{

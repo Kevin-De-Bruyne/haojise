@@ -27,8 +27,8 @@
             <!-- <div class="text1">
               {{ item.intro }}
             </div> -->
-            <div class="text2">
-              {{ item.intro }}
+            <div class="text2" v-html="item.intro">
+              <!-- {{ item.intro }} -->
             </div>
           </div>
              </div>
@@ -135,8 +135,8 @@
     
     <div class="ygl-section-items banner-5">
       <div class="main-content-center ">
-        <div class="news-desc-wrapper">
-          <div class="ygl-section-title-box">
+        <div class="news-desc-wrapper" @click="$router.push('/news_list')">
+          <!-- <div class="ygl-section-title-box">
             <div class="ch-title">新闻动态</div>
             <div class="desc-text">
               GOOD NEWS
@@ -146,7 +146,7 @@
           <div class="news-desc">发发发发发发</div>
           <div class="read-news-button" @click="$router.push('/news_list')">
             点击阅读
-          </div>
+          </div> -->
         </div>
         <div class="icon-box">
                     <span class="iconfont icon-arrow-left" @click="swiper_prev()"></span>
@@ -582,7 +582,6 @@ this.createAn('.bottom_an','bottom')
   box-sizing: border-box;
   .title{
     text-align: center;
-    color: white;
     line-height: 40px;
     margin: 0 0 10px 0;
     font-size: 20px;

@@ -109,12 +109,15 @@
 
 .banner-5 .news-desc-wrapper {
     display: inline-block;
-    width: 20%;
-    background: #9f9b93;
-    padding: 40px 240px 58px 40px;
+    /* width: 20%; */
     text-align: left;
     color: #fff;
+    background: url('../../src/assets//news_bg.jpg') 0 0 no-repeat;
+    /* background-size: 100% 100%; */
+    width: 595px;
+    height: 465px;
     position: relative;
+    cursor: pointer;
 }
 
 
